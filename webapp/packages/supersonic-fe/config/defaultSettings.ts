@@ -4,12 +4,13 @@ const Settings: ProLayoutProps & {
   pwa?: boolean;
   logo?: string;
 } = {
+  pure: false,
   navTheme: 'light',
   colorPrimary: '#296DF3',
   layout: 'top',
   contentWidth: 'Fluid',
-  fixedHeader: false,
-  fixSiderbar: true,
+  fixedHeader: true,
+  fixSiderbar: false,
   colorWeak: false,
   title: '',
   pwa: false,
