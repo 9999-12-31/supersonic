@@ -2,7 +2,7 @@
 
 body {
   background-image: url('../../assets/loginbg.png');
-  background-size: cover;
+  background-size: 100% 100%;
 }
 
 .loginWarp {
@@ -12,19 +12,23 @@ body {
   overflow: auto;
   .content {
     flex: 1;
-    padding: 32px 0 24px;
+    //padding: 32px 0 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .formContent {
       display: flex;
       flex: 1 1;
       flex-direction: column;
-      height: 100%;
-      padding: 132px 0 24px;
+      //height: 100%;
+      //padding: 132px 0 24px;
       overflow: auto;
       background: inherit;
       .formBox {
-        min-width: 480px;
-        max-width: 500px;
+        //min-width: 480px;
+        //max-width: 500px;
         margin: 0 auto;
+        margin-left: 68%;
       }
     }
   }
@@ -33,13 +37,13 @@ body {
 .loginMain {
   // max-width: 480px;
   // min-height: 200px;
-  position: absolute;
+  //position: absolute;
   // margin: 120px auto auto;
   right: 10vw;
   top: 12vh;
-  padding: 20px;
-  height: 65vh;
-  width: 28vw;
+  padding: 30px;
+  //height: 65vh;
+  width: 350px;
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 0 10px 2px #eee;
@@ -69,4 +73,10 @@ body {
 
 .button {
   margin-left: 10px;
+}
+.loginLogo{
+  position: absolute;
+  left: 5vw;
+  top: 5vh;
+  width: 180px;
 }

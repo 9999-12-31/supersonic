@@ -88,14 +88,14 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className={styles.loginWarp}>
-    <img src={require("@/assets/zhinengwenshu.png")} style={{width: '180px', margin: 50}}/>
+    <img src={require("@/assets/zhinengwenshu.png")} className={styles.loginLogo}/>
       <div className={styles.content}>
         <div className={styles.formContent}>
           <div className={styles.formBox}>
             <Form form={form} labelCol={{ span: 6 }} colon={false}>
               <div className={styles.loginMain}>
                 <h3 className={styles.title}>
-                  <img src={require("@/assets/zhinengwenshu.png")} style={{width: '230px'}}/>
+                  <img src={require("@/assets/zhinengwenshu.png")} style={{width: '55%'}}/>
                 </h3>
                 <Item name="name" rules={[{ required: true }]} label="">
                   <Input size="large" placeholder="用户名: admin" prefix={<UserOutlined />} />
