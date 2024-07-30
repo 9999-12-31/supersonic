@@ -111,9 +111,9 @@ export async function getInitialState(): Promise<{
 export function onRouteChange() {
   const title = window.document.title.split('-SuperSonic')[0];
   if (!title.includes('SuperSonic')) {
-    window.document.title = `${title}-SuperSonic`;
+    window.document.title = `${title}`;
   } else {
-    window.document.title = 'SuperSonic';
+    window.document.title = '智能问数';
   }
 }
 
