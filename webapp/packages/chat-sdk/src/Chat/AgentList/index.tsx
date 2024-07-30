@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { message } from 'antd';
 import IconFont from '../../components/IconFont';
 import { AGENT_ICONS } from '../constants';
+import { MessageOutlined } from '@ant-design/icons';
 
 type Props = {
   agentList: AgentType[];
@@ -37,7 +38,8 @@ const AgentList: React.FC<Props> = ({ agentList, currentAgent, onSelectAgent }) 
               }}
             >
               <IconFont type={AGENT_ICONS[index % AGENT_ICONS.length]} className={styles.avatar} />
-              <div className={styles.agentInfo}>
+			  {/*<MessageOutlined style={{ fontSize: '35px', color: '#08c' }} />*/}
+			  <div className={styles.agentInfo}>
                 <div className={styles.agentName}>{agent.name}</div>
                 <div className={styles.agentDesc}>{agent.description}</div>
               </div>

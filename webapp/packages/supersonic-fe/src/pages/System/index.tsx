@@ -19,8 +19,10 @@ import { ProCard } from '@ant-design/pro-components';
 import SelectTMEPerson from '@/components/SelectTMEPerson';
 import { ConfigParametersItem, SystemConfig } from './types';
 import FormItemTitle from '@/components/FormHelper/FormItemTitle';
-import { groupBy } from 'lodash';
+import { groupBy, size } from 'lodash';
 import { genneratorFormItemList } from '../SemanticModel/utils';
+import { index } from '@antv/x6/lib/util/dom/elem';
+import SizeContext from 'supersonic-insights-flow-components/dist/common/config-provider/SizeContext';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -95,53 +97,62 @@ const System: React.FC = () => {
 
   return (
     <>
-      <div style={{ margin: '40px auto', width: 1200 }}>
-        <Row>
-          <Col span={18}>
-            <ProCard
-              title="系统设置"
-              extra={
-                <Space>
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      querySaveSystemConfig();
-                    }}
-                  >
-                    保 存
-                  </Button>
-                </Space>
-              }
-            >
-              <Form form={form} layout="vertical" className={styles.form}>
-                <FormItem name="admins" label="管理员">
-                  <SelectTMEPerson placeholder="请邀请团队成员" />
-                </FormItem>
-                <Divider />
-                <Space direction="vertical" style={{ width: '100%' }} size={35}>
-                  {Object.keys(systemConfig).map((key: string) => {
-                    const itemList = systemConfig[key];
-                    return (
-                      <ProCard
-                        title={<span style={{ color: '#296df3' }}>{key}</span>}
-                        key={key}
-                        bordered
-                        id={key}
-                      >
-                        {genneratorFormItemList(itemList)}
-                      </ProCard>
-                    );
-                  })}
-                </Space>
-              </Form>
-            </ProCard>
-          </Col>
-          <Col span={6} style={{ background: '#fff' }}>
+      <div style={{ margin: '0 auto' }}>
+          <div style={{ background: '#fff', width: '15%', height: '1000px', position: 'fixed', boxShadow: '1px 1px 5px grey'}}>
             <div style={{ marginTop: 20 }}>
-              <Anchor items={anchorItems} />
+              <Anchor items={anchorItems} style={{ marginTop: 10 }}/>
             </div>
-          </Col>
-        </Row>
+          </div>
+
+          <div style={{ width: '84%', float: 'right' }}>
+
+            <div style={{background: '#fff', height: '20vh', marginBottom: '10px'}}>
+              <Form form={form} layout="vertical" className={styles.form} style={{padding:'20px'}}>
+                <h2 style={{display:'inline-block'}}>系统设置</h2>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    querySaveSystemConfig();
+                  }}
+                  style={{ float: 'right' }}
+                >
+                  保 存
+                </Button>
+                <FormItem name="admins" label="管理员">
+                  <SelectTMEPerson placeholder="请邀请团队成员"/>
+                </FormItem>
+              </Form>
+            </div>
+
+            <div style={{background: '#fff', height: '70vh', overflow:'auto'}}>
+              <ProCard
+                title=""
+                extra={
+                  <Space>
+                  </Space>
+                }
+              >
+                <Form form={form} layout="vertical" className={styles.form}>
+                  <Space direction="vertical" style={{ width: '100%' }} size={35}>
+                    {Object.keys(systemConfig).map((key: string) => {
+                      const itemList = systemConfig[key];
+                      return (
+                        <ProCard
+                          title={<span style={{ color: '#296df3' }}>{key}</span>}
+                          key={key}
+                          bordered
+                          id={key}
+                        >
+                          {genneratorFormItemList(itemList)}
+                        </ProCard>
+                      );
+                    })}
+                  </Space>
+                </Form>
+              </ProCard>
+            </div>
+          </div>
+
       </div>
     </>
   );

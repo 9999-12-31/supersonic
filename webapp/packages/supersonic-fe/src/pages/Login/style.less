@@ -1,5 +1,10 @@
 @import '~@/assets/css/variable.less';
 
+body {
+  background-image: url('../../assets/loginbg.png');
+  background-size: cover;
+}
+
 .loginWarp {
   display: flex;
   flex-direction: column;
@@ -28,16 +33,22 @@
 .loginMain {
   // max-width: 480px;
   // min-height: 200px;
-  margin: 120px auto auto;
+  position: absolute;
+  // margin: 120px auto auto;
+  right: 10vw;
+  top: 12vh;
   padding: 20px;
+  height: 65vh;
+  width: 28vw;
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 0 10px 2px #eee;
 }
 
 .title {
-  margin-bottom: 20px;
-  font-size: 24px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  font-size: 15px;
   text-align: center;
 }
 
