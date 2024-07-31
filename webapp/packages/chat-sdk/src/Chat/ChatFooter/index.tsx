@@ -343,7 +343,7 @@ const ChatFooter: ForwardRefRenderFunction<any, Props> = (
         )}
         <div className={styles.toolItem} onClick={onOpenShowcase}>
           <IconFont type="icon-showcase" className={styles.toolIcon} />
-          <div>showcase</div>
+          <div>示例</div>
         </div>
       </div>
       <div className={styles.composer}>
