@@ -4,6 +4,7 @@ import { message, Button, Space, Popconfirm } from 'antd';
 import React, { useRef, useState, useEffect } from 'react';
 import UserSettingModal from './UserSettingModal';
 import UserEditModal from './UserEditModal';
+import request from 'umi-request'
 
 import moment from 'moment';
 
@@ -19,40 +20,15 @@ const UserTable: React.FC<Props> = ({}) => {
 
   // 获取用户列表 查询接口
   const queryDatabaseList = async () => {
-    const data = [
-        {
-            "id": 1,
-            "name": "abc",
-            "display_name": "测试一",
-            "password": "123456",
-            "email": "123@a.com",
-
-        },
-        {
-            "id": 2,
-            "name": "abcd",
-            "display_name": "测试二",
-            "password": "123456",
-            "email": "123@a.com",
-
-        },
-        {
-            "id": 3,
-            "name": "abcde",
-            "display_name": "测试三",
-            "password": "123456",
-            "email": "123@a.com",
-
-        },
-    ]
-    setDataBaseList(data);
-    console.log("Query");
-    // const { code, data, msg } = await getDatabaseList();
-    // if (code === 200) {
-    //   setDataBaseList(data);
-    // } else {
-    //   message.error(msg);
-    // }
+    request(`${process.env.AUTH_API_BASE_URL}user/getUserList`, {
+      method: 'get',
+    }).then(res => {
+      if(res.code===200){
+        setDataBaseList(res.data)
+      }else{
+        message.error(res.msg)
+      }
+    })
   };
 
   // 删除接口
@@ -79,7 +55,7 @@ const UserTable: React.FC<Props> = ({}) => {
     },
 
     {
-      dataIndex: 'display_name',
+      dataIndex: 'displayName',
       title: '中文名',
     },
     {

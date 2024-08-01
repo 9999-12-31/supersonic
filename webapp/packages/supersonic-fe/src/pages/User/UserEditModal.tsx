@@ -28,16 +28,14 @@ const UserEditModal: React.FC<CreateFormProps> = ({
   type FieldType = {
     id?: number;
     name?: string;
-    display_name?: string,
-    password?: string;
+    displayName?: string,
     email?: string;
   };
 
   let originValue = {
     id: databaseItem.id,
     name: databaseItem.name,
-    display_name: databaseItem.display_name,
-    password: databaseItem.password,
+    displayName: databaseItem.displayName,
     email: databaseItem.email,
   }
 
@@ -91,17 +89,17 @@ const UserEditModal: React.FC<CreateFormProps> = ({
 
           <Form.Item<FieldType>
             label="中文名"
-            name="display_name"
+            name="displayName"
           >
-            <Input defaultValue={originValue.display_name}/>
+            <Input defaultValue={originValue.displayName}/>
           </Form.Item>
 
-          <Form.Item<FieldType>
+          {/*<Form.Item<FieldType>
             label="密码"
             name="password"
           >
             <Input.Password defaultValue={originValue.password}/>
-          </Form.Item>
+          </Form.Item>*/}
 
           <Form.Item<FieldType>
             label="Email"

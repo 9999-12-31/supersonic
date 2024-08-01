@@ -105,6 +105,16 @@ const MetricDetail: React.FC<Props> = () => {
     <>
       <div className={styles.metricDetailWrapper}>
         <div className={styles.metricDetail}>
+          {/*<div className={styles.siderContainer}>*/}
+          <div style={{width: '400px'}}>
+            <MetricInfoSider
+              relationDimensionOptions={relationDimensionOptions}
+              metircData={metircData}
+              onDimensionRelationBtnClick={() => {
+                setMetricRelationModalOpenState(true);
+              }}
+            />
+          </div>
           <div className={styles.tabContainer}>
             <Tabs
               defaultActiveKey="metricCaliberInput"
@@ -130,15 +140,7 @@ const MetricDetail: React.FC<Props> = () => {
               className={styles.metricDetailTab}
             />
           </div>
-          <div className={styles.siderContainer}>
-            <MetricInfoSider
-              relationDimensionOptions={relationDimensionOptions}
-              metircData={metircData}
-              onDimensionRelationBtnClick={() => {
-                setMetricRelationModalOpenState(true);
-              }}
-            />
-          </div>
+
         </div>
         <DimensionAndMetricRelationModal
           metricItem={metircData}

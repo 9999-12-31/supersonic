@@ -1,4 +1,4 @@
-import styles from './sysCss.less';
+import './sysCss.less';
 import {
   Button,
   Form,
@@ -213,30 +213,6 @@ const System: React.FC = () => {
     groupConfigAndSet(Object.values(tempConfigMap));
   };
 
-  // function showUserTable() {
-  //   if(showState){
-  //     setShowState(0)
-  //   }else{
-  //     setShowState(1)
-  //   }
-  // }
-
-  // 条件渲染用户管理框
-  // const showUser = (val?:number)=> {
-  //   if(val===1){
-  //       return (
-  //       <div style={{padding:20}}>
-  //         <ProCard
-  //           title={<span style={{ color: '#296df3' }}>用户管理</span>}
-  //           bordered
-  //         >
-  //           <UserTable />
-  //         </ProCard>
-  //       </div>
-  //       );
-  //   }
-  // }
-
 
   return (
     <>
@@ -248,8 +224,8 @@ const System: React.FC = () => {
           </div>
 
           <div style={{ width: '84%', float: 'right' }}>
-            <div style={{background: '#fff', minHeight: '20vh', marginBottom: '10px', overflow: 'auto'}}>
-              <Form form={form} layout="vertical" className={styles.form} style={{padding:'20px'}}>
+            <div style={{background: '#fff', minHeight: '18vh', marginBottom: '10px', overflow: 'auto'}}>
+              <Form form={form} layout="vertical" style={{padding:'20px'}}>
                 <h2 style={{display:'inline-block'}}>系统设置</h2>
                 <Button
                   type="primary"
@@ -267,7 +243,7 @@ const System: React.FC = () => {
               {/*{showUser(showState)}*/}
             </div>
 
-            <div style={{background: '#fff', height: '65vh', overflow:'auto'}}>
+            <div style={{background: '#fff', height: '60vh', overflow:'auto'}} className={'rightBottom'}>
               <ProCard
                 title=""
                 extra={
@@ -275,7 +251,7 @@ const System: React.FC = () => {
                   </Space>
                 }
               >
-                <Form form={form} layout="vertical" className={styles.form}>
+                <Form form={form} layout="vertical">
                   <Space direction="vertical" style={{ width: '100%' }} size={35}>
                     {Object.keys(systemConfig).map((key: string) => {
                       const itemList = systemConfig[key];

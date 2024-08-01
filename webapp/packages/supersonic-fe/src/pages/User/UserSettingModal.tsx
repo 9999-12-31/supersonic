@@ -28,7 +28,7 @@ const UserSettingModal: React.FC<CreateFormProps> = ({
 
   type FieldType = {
     name?: string;
-    display_name?: string,
+    displayName?: string,
     password?: string;
     email?: string;
   };
@@ -77,7 +77,7 @@ const UserSettingModal: React.FC<CreateFormProps> = ({
 
           <Form.Item<FieldType>
             label="中文名"
-            name="display_name"
+            name="displayName"
             rules={[{ required: true, message: 'Please input your rolename!' }]}
           >
             <Input />
