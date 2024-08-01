@@ -10,8 +10,8 @@ import com.tencent.supersonic.auth.api.authentication.request.UserEditReq;
 import com.tencent.supersonic.auth.api.authentication.request.UserReq;
 import com.tencent.supersonic.auth.authentication.persistence.dataobject.UserDO;
 import com.tencent.supersonic.auth.authentication.persistence.repository.UserRepository;
-import com.tencent.supersonic.common.util.AESEncryptionUtil;
 import com.tencent.supersonic.auth.authentication.utils.UserTokenUtils;
+import com.tencent.supersonic.common.util.AESEncryptionUtil;
 import com.tencent.supersonic.common.util.ContextUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -141,11 +141,11 @@ public class DefaultUserAdaptor implements UserAdaptor {
     public void edit(UserEditReq userEditReq) {
         UserRepository userRepository = ContextUtils.getBean(UserRepository.class);
         UserDO userDO = userRepository.getUser(userEditReq.getName());
-        if (userDO == null){
+        if (userDO == null) {
             throw new RuntimeException(String.format("user %s not exist", userEditReq.getName()));
         }
         BeanUtils.copyProperties(userEditReq, userDO);
-        if (userEditReq.getPassword() != null){
+        if (userEditReq.getPassword() != null) {
             try {
                 byte[] salt = AESEncryptionUtil.generateSalt(userDO.getName());
                 userDO.setSalt(AESEncryptionUtil.getStringFromBytes(salt));
