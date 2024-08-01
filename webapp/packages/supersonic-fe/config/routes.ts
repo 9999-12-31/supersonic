@@ -163,6 +163,12 @@ const ROUTES = [
     access: ROUTE_AUTH_CODES.SYSTEM_ADMIN,
   },
   {
+    path: '/user',
+    name: 'user',
+    component: './User/UserTable',
+    access: ROUTE_AUTH_CODES.SYSTEM_ADMIN,
+  },
+  {
     path: '/',
     redirect: APP_TARGET === 'inner' ? '/model' : '/chat',
     envRedirect: {

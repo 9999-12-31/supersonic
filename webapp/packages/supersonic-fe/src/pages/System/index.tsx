@@ -1,4 +1,4 @@
-import styles from './style.less';
+import styles from './sysCss.less';
 import {
   Button,
   Form,
@@ -21,6 +21,8 @@ import { ConfigParametersItem, SystemConfig } from './types';
 import FormItemTitle from '@/components/FormHelper/FormItemTitle';
 import { groupBy } from 'lodash';
 import { genneratorFormItemList } from '../SemanticModel/utils';
+// import UserTable from './userManage'
+import { Point } from '@antv/x6';
 
 const FormItem = Form.Item;
 type Admin = string[];
@@ -31,6 +33,8 @@ const System: React.FC = () => {
     [],
   );
   const [configSource, setConfigSource] = useState<SystemConfig>();
+  // 显示用户管理或功能配置状态切换
+  const [showState, setShowState ] = useState(1);
 
   const configMap = useRef<Record<string, ConfigParametersItem>>();
 
@@ -209,66 +213,90 @@ const System: React.FC = () => {
     groupConfigAndSet(Object.values(tempConfigMap));
   };
 
+  // function showUserTable() {
+  //   if(showState){
+  //     setShowState(0)
+  //   }else{
+  //     setShowState(1)
+  //   }
+  // }
+
+  // 条件渲染用户管理框
+  // const showUser = (val?:number)=> {
+  //   if(val===1){
+  //       return (
+  //       <div style={{padding:20}}>
+  //         <ProCard
+  //           title={<span style={{ color: '#296df3' }}>用户管理</span>}
+  //           bordered
+  //         >
+  //           <UserTable />
+  //         </ProCard>
+  //       </div>
+  //       );
+  //   }
+  // }
+
+
   return (
     <>
        <div style={{ margin: '0 auto' }}>
-                <div style={{ background: '#fff', width: '15%', height: '1000px', position: 'fixed', boxShadow: '1px 1px 5px grey'}}>
-                  <div style={{ marginTop: 20 }}>
-                    <Anchor items={anchorItems} style={{ marginTop: 10 }}/>
-                  </div>
-                </div>
+          <div style={{ background: '#fff', width: '15%', height: '1000px', position: 'fixed', boxShadow: '0.5px 0.5px 3px grey'}}>
+            <div style={{ marginTop: 1 }}>
+              <Anchor items={anchorItems} style={{ marginTop: 10 }}/>
+            </div>
+          </div>
 
-                <div style={{ width: '84%', float: 'right' }}>
-
-                  <div style={{background: '#fff', height: '20vh', marginBottom: '10px'}}>
-                    <Form form={form} layout="vertical" className={styles.form} style={{padding:'20px'}}>
-                      <h2 style={{display:'inline-block'}}>系统设置</h2>
-                      <Button
-                        type="primary"
-                        onClick={() => {
-                          querySaveSystemConfig();
-                        }}
-                        style={{ float: 'right' }}
-                      >
-                        保 存
-                      </Button>
-                      <FormItem name="admins" label="管理员">
-                        <SelectTMEPerson placeholder="请邀请团队成员"/>
-                      </FormItem>
-                    </Form>
-                  </div>
-
-                  <div style={{background: '#fff', height: '70vh', overflow:'auto'}}>
-                    <ProCard
-                      title=""
-                      extra={
-                        <Space>
-                        </Space>
-                      }
-                    >
-                      <Form form={form} layout="vertical" className={styles.form}>
-                        <Space direction="vertical" style={{ width: '100%' }} size={35}>
-                          {Object.keys(systemConfig).map((key: string) => {
-                            const itemList = systemConfig[key];
-                            return (
-                              <ProCard
-                                title={<span style={{ color: '#296df3' }}>{key}</span>}
-                                key={key}
-                                bordered
-                                id={key}
-                              >
-                                {genneratorFormItemList(itemList, form)}
-                              </ProCard>
-                            );
-                          })}
-                        </Space>
-                      </Form>
-                    </ProCard>
-                  </div>
-                </div>
-
+          <div style={{ width: '84%', float: 'right' }}>
+            <div style={{background: '#fff', minHeight: '20vh', marginBottom: '10px', overflow: 'auto'}}>
+              <Form form={form} layout="vertical" className={styles.form} style={{padding:'20px'}}>
+                <h2 style={{display:'inline-block'}}>系统设置</h2>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    querySaveSystemConfig();
+                  }}
+                  style={{ float: 'right' }}
+                >
+                  保 存
+                </Button>
+                <FormItem name="admins" label="管理员">
+                  <SelectTMEPerson placeholder="请邀请团队成员"/>
+                </FormItem>
+              </Form>
+              {/*{showUser(showState)}*/}
             </div>
 
+            <div style={{background: '#fff', height: '65vh', overflow:'auto'}}>
+              <ProCard
+                title=""
+                extra={
+                  <Space>
+                  </Space>
+                }
+              >
+                <Form form={form} layout="vertical" className={styles.form}>
+                  <Space direction="vertical" style={{ width: '100%' }} size={35}>
+                    {Object.keys(systemConfig).map((key: string) => {
+                      const itemList = systemConfig[key];
+                      return (
+                        <ProCard
+                          title={<span style={{ color: '#296df3' }}>{key}</span>}
+                          key={key}
+                          bordered
+                          id={key}
+                        >
+                          {genneratorFormItemList(itemList, form)}
+                        </ProCard>
+                      );
+                    })}
+
+                  </Space>
+                </Form>
+              </ProCard>
+            </div>
+          </div>
+       </div>
     </>
   );
 };
