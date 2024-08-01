@@ -3,6 +3,7 @@ package com.tencent.supersonic.auth.authentication.rest;
 
 import com.tencent.supersonic.auth.api.authentication.pojo.Organization;
 import com.tencent.supersonic.auth.api.authentication.pojo.User;
+import com.tencent.supersonic.auth.api.authentication.request.UserEditReq;
 import com.tencent.supersonic.auth.api.authentication.request.UserReq;
 import com.tencent.supersonic.auth.api.authentication.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -67,6 +68,11 @@ public class UserController {
     @PostMapping("/login")
     public String login(@RequestBody UserReq userCmd, HttpServletRequest request) {
         return userService.login(userCmd, request);
+    }
+
+    @PostMapping("/edit")
+    public void edit(@RequestBody UserEditReq userEditCmd) {
+        userService.edit(userEditCmd);
     }
 
 }

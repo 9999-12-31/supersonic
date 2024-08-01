@@ -6,6 +6,7 @@ import com.tencent.supersonic.auth.api.authentication.adaptor.UserAdaptor;
 import com.tencent.supersonic.auth.api.authentication.pojo.Organization;
 import com.tencent.supersonic.auth.api.authentication.pojo.User;
 import com.tencent.supersonic.auth.api.authentication.pojo.UserWithPassword;
+import com.tencent.supersonic.auth.api.authentication.request.UserEditReq;
 import com.tencent.supersonic.auth.api.authentication.request.UserReq;
 import com.tencent.supersonic.auth.authentication.persistence.dataobject.UserDO;
 import com.tencent.supersonic.auth.authentication.persistence.repository.UserRepository;
@@ -134,6 +135,27 @@ public class DefaultUserAdaptor implements UserAdaptor {
     @Override
     public Set<String> getUserAllOrgId(String userName) {
         return Sets.newHashSet();
+    }
+
+    @Override
+    public void edit(UserEditReq userEditReq) {
+        UserRepository userRepository = ContextUtils.getBean(UserRepository.class);
+        UserDO userDO = userRepository.getUser(userEditReq.getName());
+        if (userDO == null){
+            throw new RuntimeException(String.format("user %s not exist", userEditReq.getName()));
+        }
+        BeanUtils.copyProperties(userEditReq, userDO);
+        if (userEditReq.getPassword() != null){
+            try {
+                byte[] salt = AESEncryptionUtil.generateSalt(userDO.getName());
+                userDO.setSalt(AESEncryptionUtil.getStringFromBytes(salt));
+                userDO.setPassword(AESEncryptionUtil.encrypt(userEditReq.getPassword(), salt));
+            } catch (Exception e) {
+                throw new RuntimeException("password encrypt error, please try again");
+            }
+        }
+
+        userRepository.editUser(userDO);
     }
 
 }
