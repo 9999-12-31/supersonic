@@ -39,4 +39,9 @@ public class UserRepositoryImpl implements UserRepository {
         return userDOOptional.orElse(null);
     }
 
+    @Override
+    public void editUser(UserDO userDO) {
+        userDOMapper.update(userDO);
+    }
+
 }
