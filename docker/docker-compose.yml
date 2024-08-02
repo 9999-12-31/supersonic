@@ -103,7 +103,7 @@ services:
       - 8.8.4.4
     volumes:
       #1.Named Volumes are best for persistent data managed by Docker.
-      - chatbi_data:/usr/src/app/supersonic-standalone-${SUPERSONIC_VERSION:-latest}
+      - chatbi_standalone:/usr/src/app/supersonic-standalone-${SUPERSONIC_VERSION:-latest}
       #2.Bind Mounts are suitable for frequent modifications and debugging.
       #      - ./conf/langchain4j-prd.yaml:/usr/src/app/supersonic-standalone-${SUPERSONIC_VERSION:-latest}/conf/langchain4j-prd.yaml
       #3.Detailed Bind Mounts offer more control over the mount behavior.

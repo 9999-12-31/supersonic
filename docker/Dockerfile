@@ -17,12 +17,8 @@ RUN apt-get update && \
     apt-get install -y vim && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy the supersonic standalone zip file into the container
-COPY assembly/build/supersonic-standalone-${SUPERSONIC_VERSION}.zip .
-
-# Unzip the supersonic standalone zip
-RUN unzip supersonic-standalone-${SUPERSONIC_VERSION}.zip && \
-    rm supersonic-standalone-${SUPERSONIC_VERSION}.zip
+# Copy the supersonic standalone file into the container
+COPY assembly/build/supersonic-standalone-${SUPERSONIC_VERSION} /usr/src/app/supersonic-standalone-${SUPERSONIC_VERSION}
 
 # Create a symbolic link to the supersonic installation directory
 RUN ln -s /usr/src/app/supersonic-standalone-${SUPERSONIC_VERSION} /usr/src/app/supersonic-standalone-latest
