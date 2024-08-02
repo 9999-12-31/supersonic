@@ -51,12 +51,12 @@ const UserTable: React.FC<Props> = ({}) => {
     },
     {
       dataIndex: 'name',
-      title: '用户名',
+      title: '账号',
     },
 
     {
       dataIndex: 'displayName',
-      title: '中文名',
+      title: '姓名',
     },
     {
       dataIndex: 'email',

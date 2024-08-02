@@ -98,13 +98,13 @@ const LoginPage: React.FC = () => {
                   <img src={require("@/assets/zhinengwenshu.png")} style={{width: '55%'}}/>
                 </h3>
                 <Item name="name" rules={[{ required: true }]} label="">
-                  <Input size="large" placeholder="用户名: admin" prefix={<UserOutlined />} />
+                  <Input size="large" placeholder="用户名" prefix={<UserOutlined />} />
                 </Item>
                 <Item name="password" rules={[{ required: true }]} label="">
                   <Input
                     size="large"
                     type="password"
-                    placeholder="密码: 123456"
+                    placeholder="密码"
                     onPressEnter={handleLogin}
                     prefix={<LockOutlined />}
                   />

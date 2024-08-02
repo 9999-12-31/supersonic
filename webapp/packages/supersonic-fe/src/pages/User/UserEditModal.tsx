@@ -94,12 +94,12 @@ const UserEditModal: React.FC<CreateFormProps> = ({
           autoComplete="off"
         >
 
-          <Form.Item<FieldType>
+          {/*<Form.Item<FieldType>
             label="用户id"
             name="id"
           >
             <Input defaultValue={originValue.id} disabled='true'/>
-          </Form.Item>
+          </Form.Item>*/}
 
           <Form.Item<FieldType>
             label="用户名"
@@ -119,7 +119,7 @@ const UserEditModal: React.FC<CreateFormProps> = ({
             label="请输入新密码"
             name="password"
           >
-            <Input.Password placeholder="于此处填写新密码，若不修改则不填写"/>
+            <Input.Password placeholder="请于此处填写新密码，若未填写则不修改密码"/>
           </Form.Item>
 
           {/*<Form.Item<FieldType>

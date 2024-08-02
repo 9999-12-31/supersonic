@@ -97,14 +97,14 @@ const PermissionAdminForm: React.FC<Props> = ({ permissionTarget, onValuesChange
           <SelectTMEPerson placeholder="请邀请团队成员" />
         </FormItem>
         {/* {APP_TARGET === 'inner'} */}
-        <FormItem name="adminOrgs" label="按组织">
+        {/*<FormItem name="adminOrgs" label="按组织1">
           <SelectPartner
             type="selectedDepartment"
             treeSelectProps={{
               placeholder: '请选择需要授权的部门',
             }}
           />
-        </FormItem>
+        </FormItem>*/}
         <Form.Item
           label={
             <FormItemTitle
@@ -122,14 +122,14 @@ const PermissionAdminForm: React.FC<Props> = ({ permissionTarget, onValuesChange
         {!isOpenState && (
           <>
             {/* {APP_TARGET === 'inner' && } */}
-            <FormItem name="viewOrgs" label="按组织">
+            {/*<FormItem name="viewOrgs" label="按组织2">
               <SelectPartner
                 type="selectedDepartment"
                 treeSelectProps={{
                   placeholder: '请选择需要授权的部门',
                 }}
               />
-            </FormItem>
+            </FormItem>*/}
             <FormItem name="viewers" label="按个人">
               <SelectTMEPerson placeholder="请选择需要授权的个人" />
             </FormItem>

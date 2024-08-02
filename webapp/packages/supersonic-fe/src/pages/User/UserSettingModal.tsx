@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import { message, Button, Modal, Space } from 'antd';
 import { Form, Input } from 'antd';
 import request from 'umi-request'
+import CryptoJS from 'crypto-js';
+import { encryptPassword } from '@/utils/utils';
 
 export type CreateFormProps = {
   onCancel: () => void;
@@ -19,6 +21,8 @@ const UserSettingModal: React.FC<CreateFormProps> = ({
   const [testLoading, setTestLoading] = useState<boolean>(false);
 
   const createFormRef = useRef<any>({});
+
+  const encryptKey = CryptoJS.enc.Utf8.parse('supersonic@2024');
 
   const renderFooter = () => {
     return (
@@ -40,7 +44,7 @@ const UserSettingModal: React.FC<CreateFormProps> = ({
     // 新用户创建提交
     request(`${process.env.AUTH_API_BASE_URL}user/register`, {
       method: 'post',
-      data: val
+      data: { ...val, password: encryptPassword(val.password, encryptKey) }
     }).then(res => {
       if(res.code===200){
         message.success('添加成功')
@@ -78,17 +82,9 @@ const UserSettingModal: React.FC<CreateFormProps> = ({
           autoComplete="off"
         >
           <Form.Item<FieldType>
-            label="用户名"
+            label="账号"
             name="name"
             rules={[{ required: true, message: 'Please input your username!' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item<FieldType>
-            label="中文名"
-            name="displayName"
-            rules={[{ required: true, message: 'Please input your rolename!' }]}
           >
             <Input />
           </Form.Item>
@@ -102,12 +98,19 @@ const UserSettingModal: React.FC<CreateFormProps> = ({
           </Form.Item>
 
           <Form.Item<FieldType>
-            label="Email"
+            label="姓名"
+            name="displayName"
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item<FieldType>
+            label="邮箱"
             name="email"
-            rules={[{ required: true, message: 'Please input your email!' },
+            rules={[
             {
             type: "email",          // E-mail 格式类型
-            message: "The input is not valid E-mail",
+            message: "请输入正确的电子邮箱格式",
             },
             ]}
           >
