@@ -79,7 +79,7 @@ const UserTable: React.FC<Props> = ({}) => {
             >
               编辑
             </a>
-            <Popconfirm
+            {/*<Popconfirm
               title="确认删除？"
               okText="是"
               cancelText="否"
@@ -101,7 +101,7 @@ const UserTable: React.FC<Props> = ({}) => {
               >
                 删除
               </a>
-            </Popconfirm>
+            </Popconfirm>*/}
           </Space>
         );
       },

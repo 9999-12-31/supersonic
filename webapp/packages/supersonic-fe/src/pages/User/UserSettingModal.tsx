@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { Button, Modal, Space } from 'antd';
+import { message, Button, Modal, Space } from 'antd';
 import { Form, Input } from 'antd';
+import request from 'umi-request'
 
 export type CreateFormProps = {
   onCancel: () => void;
@@ -35,11 +36,20 @@ const UserSettingModal: React.FC<CreateFormProps> = ({
 
   //新增接口
   const onFinish=(val:any)=>{
-    console.log(val)
+    // console.log(val)
     // 新用户创建提交
+    request(`${process.env.AUTH_API_BASE_URL}user/register`, {
+      method: 'post',
+      data: val
+    }).then(res => {
+      if(res.code===200){
+        message.success('添加成功')
+        onSubmit();// 刷新查询
+      }else{
+        message.error('添加失败')
+      }
+    })
     // 设置请求结果
-    onSubmit();// 刷新查询
-
   }
 
   const onFinishFailed=(val:any)=>{

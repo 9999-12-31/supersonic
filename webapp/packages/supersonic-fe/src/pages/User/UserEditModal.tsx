@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Button, Modal, Space } from 'antd';
-import { Form, Input } from 'antd';
+import { message, Form, Input } from 'antd';
+import request from 'umi-request'
 
 export type CreateFormProps = {
   onCancel: () => void;
@@ -29,6 +30,8 @@ const UserEditModal: React.FC<CreateFormProps> = ({
     id?: number;
     name?: string;
     displayName?: string,
+    password?: string,
+    // password_verify?: string,
     email?: string;
   };
 
@@ -36,15 +39,33 @@ const UserEditModal: React.FC<CreateFormProps> = ({
     id: databaseItem.id,
     name: databaseItem.name,
     displayName: databaseItem.displayName,
+    password: databaseItem.password,
     email: databaseItem.email,
   }
 
   //编辑更新接口
   const onFinish=(val:any)=>{
-    console.log(val)
+    const post_data = {
+      name: originValue.name,
+      displayName: val.displayName,
+      email: val.email,
+      password: val.password
+    }
+    console.log(post_data)
     // 编辑内容提交
+    request(`${process.env.AUTH_API_BASE_URL}user/edit`, {
+      method: 'post',
+      data: post_data
+    }).then(res => {
+      console.log(res);
+      if(res.code===200){
+        message.success('编辑成功')
+        onSubmit();// 刷新查询
+      }else{
+        message.error('编辑失败')
+      }
+    })
     // 设置请求结果
-    onSubmit();// 刷新查询
   }
 
   const onFinishFailed=(val:any)=>{
@@ -84,7 +105,7 @@ const UserEditModal: React.FC<CreateFormProps> = ({
             label="用户名"
             name="name"
           >
-            <Input defaultValue={originValue.name}/>
+            <Input defaultValue={originValue.name} disabled='true'/>
           </Form.Item>
 
           <Form.Item<FieldType>
@@ -94,11 +115,30 @@ const UserEditModal: React.FC<CreateFormProps> = ({
             <Input defaultValue={originValue.displayName}/>
           </Form.Item>
 
-          {/*<Form.Item<FieldType>
-            label="密码"
+          <Form.Item<FieldType>
+            label="请输入新密码"
             name="password"
           >
-            <Input.Password defaultValue={originValue.password}/>
+            <Input.Password placeholder="于此处填写新密码，若不修改则不填写"/>
+          </Form.Item>
+
+          {/*<Form.Item<FieldType>
+            label="请确认新密码"
+            name="password_verify"
+            dependencies={['password']}
+            required
+            rules={[
+              ({ getFieldValue }) => ({
+                validator(rule, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject('新密码与确认新密码不同！');
+                },
+              }),
+            ]}
+          >
+            <Input.Password/>
           </Form.Item>*/}
 
           <Form.Item<FieldType>
