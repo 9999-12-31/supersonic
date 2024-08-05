@@ -1,7 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { Button, Modal, Space } from 'antd';
 import { message, Form, Input } from 'antd';
-import request from 'umi-request'
+import request from 'umi-request';
+import CryptoJS from 'crypto-js';
+import { encryptPassword } from '@/utils/utils';
 
 export type CreateFormProps = {
   onCancel: () => void;
@@ -18,6 +20,7 @@ const UserEditModal: React.FC<CreateFormProps> = ({
 }) => {
   const [testLoading, setTestLoading] = useState<boolean>(false);
   const createFormRef = useRef<any>({});
+  const encryptKey = CryptoJS.enc.Utf8.parse('supersonic@2024');
 
   const renderFooter = () => {
     return (
@@ -51,11 +54,11 @@ const UserEditModal: React.FC<CreateFormProps> = ({
       email: val.email,
       password: val.password
     }
-    console.log(post_data)
+    // console.log(post_data)
     // 编辑内容提交
     request(`${process.env.AUTH_API_BASE_URL}user/edit`, {
       method: 'post',
-      data: post_data
+      data: { ...post_data, password: encryptPassword(post_data.password, encryptKey) }
     }).then(res => {
       console.log(res);
       if(res.code===200){
@@ -102,14 +105,14 @@ const UserEditModal: React.FC<CreateFormProps> = ({
           </Form.Item>*/}
 
           <Form.Item<FieldType>
-            label="用户名"
+            label="账号"
             name="name"
           >
             <Input defaultValue={originValue.name} disabled='true'/>
           </Form.Item>
 
           <Form.Item<FieldType>
-            label="中文名"
+            label="姓名"
             name="displayName"
           >
             <Input defaultValue={originValue.displayName}/>
@@ -142,7 +145,7 @@ const UserEditModal: React.FC<CreateFormProps> = ({
           </Form.Item>*/}
 
           <Form.Item<FieldType>
-            label="Email"
+            label="邮箱"
             name="email"
           >
             <Input defaultValue={originValue.email}/>
