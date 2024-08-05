@@ -16,6 +16,7 @@ s2:
     date: true
 
   demo:
+    enable: true
     names: S2VisitsDemo,S2ArtistDemo,SmallTalkDemo
     enableLLM: true
 

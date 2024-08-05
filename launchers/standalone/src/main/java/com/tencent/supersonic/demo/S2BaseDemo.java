@@ -86,6 +86,8 @@ public abstract class S2BaseDemo implements CommandLineRunner {
     protected CanvasService canvasService;
     @Autowired
     protected DictWordService dictWordService;
+    @Value("${s2.demo.enable:true}")
+    protected Boolean demoEnable;
     @Value("${s2.demo.names:S2VisitsDemo}")
     protected List<String> demoList;
     @Value("${s2.demo.enableLLM:true}")
@@ -93,7 +95,7 @@ public abstract class S2BaseDemo implements CommandLineRunner {
 
     public void run(String... args) {
         demoDatabaseResp = addDatabaseIfNotExist();
-        if (demoList != null && demoList.contains(getClass().getSimpleName())) {
+        if (demoEnable && demoList != null && demoList.contains(getClass().getSimpleName())) {
             if (checkNeedToRun()) {
                 doRun();
             }
