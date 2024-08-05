@@ -325,7 +325,7 @@ const ChatItem: React.FC<Props> = ({
   return (
     <div className={prefixCls}>
       {!isMobile && <IconFont type="icon-zhinengsuanfa" className={`${prefixCls}-avatar`} />}
-      <div className={isMobile ? `${prefixCls}-mobile-msg-card` : ''}>
+      <div className={isMobile ? `${prefixCls}-mobile-msg-card` : `${prefixCls}-wrapper`}>
         <div className={contentClass}>
           <ParseTip
             isSimpleMode={isSimpleMode}
