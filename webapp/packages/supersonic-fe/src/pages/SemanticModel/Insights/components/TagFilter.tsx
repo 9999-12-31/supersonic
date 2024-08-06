@@ -58,7 +58,7 @@ const TagFilter: React.FC<Props> = ({
     const target = options[0];
     form.setFieldValue('tagObjectId', target?.value);
 
-    if (currentDomainId && target?.value && !initState.current) {
+    if (target?.value && !initState.current) {
       initState.current = true;
       const data = form.getFieldsValue();
       onFilterInit?.({ ...data, tagObjectId: target?.value });

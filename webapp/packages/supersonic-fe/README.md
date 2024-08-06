@@ -59,3 +59,8 @@ You can view full document on our [official website](https://pro.ant.design). An
 #### 踩坑
 
 1.antd `Select`组件如果默认不选中时默认值不是`undefeated`，则不显示 placeholder
+
+#### 前端启动
+1. 在assembly/bin路径下运行：sh supersonic-build.sh
+2. 在webapp路径下运行：sh start-fe-dev.sh
+

@@ -38,6 +38,7 @@ const SelectTMEPerson: FC<Props> = ({ placeholder, value, isMultiple = true, onC
       allowClear
       showSearch
       onChange={onChange}
+      style={{height:35}}
     >
       {userList.map((item) => {
         return (

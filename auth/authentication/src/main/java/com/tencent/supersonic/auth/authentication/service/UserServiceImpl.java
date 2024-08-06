@@ -2,6 +2,7 @@ package com.tencent.supersonic.auth.authentication.service;
 
 import com.tencent.supersonic.auth.api.authentication.pojo.Organization;
 import com.tencent.supersonic.auth.api.authentication.pojo.User;
+import com.tencent.supersonic.auth.api.authentication.request.UserEditReq;
 import com.tencent.supersonic.auth.api.authentication.request.UserReq;
 import com.tencent.supersonic.auth.api.authentication.service.UserService;
 import com.tencent.supersonic.auth.api.authentication.utils.UserHolder;
@@ -60,6 +61,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Organization> getOrganizationTree() {
         return ComponentFactory.getUserAdaptor().getOrganizationTree();
+    }
+
+    @Override
+    public void edit(UserEditReq userEditReq) {
+        ComponentFactory.getUserAdaptor().edit(userEditReq);
     }
 
     @Override

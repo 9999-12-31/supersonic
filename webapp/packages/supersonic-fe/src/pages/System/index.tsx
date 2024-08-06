@@ -1,24 +1,40 @@
-import styles from './style.less';
-import { Button, Form, message, Space, Divider, Anchor, Row, Col } from 'antd';
+import './sysCss.less';
+import {
+  Button,
+  Form,
+  Input,
+  InputNumber,
+  message,
+  Space,
+  Switch,
+  Select,
+  Divider,
+  Anchor,
+  Row,
+  Col,
+} from 'antd';
 import React, { useState, useEffect, useRef } from 'react';
-import { getSystemConfig, saveSystemConfig } from '@/services/user';
+import { getSystemConfig, saveSystemConfig, dependenciesItem } from '@/services/user';
 import { ProCard } from '@ant-design/pro-components';
 import SelectTMEPerson from '@/components/SelectTMEPerson';
-import { ConfigParametersItem, SystemConfig, dependenciesItem } from './types';
-
+import { ConfigParametersItem, SystemConfig } from './types';
+import FormItemTitle from '@/components/FormHelper/FormItemTitle';
 import { groupBy } from 'lodash';
 import { genneratorFormItemList } from '../SemanticModel/utils';
+// import UserTable from './userManage'
+import { Point } from '@antv/x6';
 
 const FormItem = Form.Item;
-
 type Admin = string[];
-
+const { TextArea } = Input;
 const System: React.FC = () => {
   const [systemConfig, setSystemConfig] = useState<Record<string, ConfigParametersItem[]>>({});
   const [anchorItems, setAnchorItems] = useState<{ key: string; href: string; title: string }[]>(
     [],
   );
   const [configSource, setConfigSource] = useState<SystemConfig>();
+  // 显示用户管理或功能配置状态切换
+  const [showState, setShowState ] = useState(1);
 
   const configMap = useRef<Record<string, ConfigParametersItem>>();
 
@@ -197,66 +213,66 @@ const System: React.FC = () => {
     groupConfigAndSet(Object.values(tempConfigMap));
   };
 
+
   return (
     <>
-      <div style={{ margin: '40px auto', width: 1200 }}>
-        <Row>
-          <Col span={18}>
-            <ProCard
-              title="系统设置"
-              extra={
-                <Space>
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      querySaveSystemConfig();
-                    }}
-                  >
-                    保 存
-                  </Button>
-                </Space>
-              }
-            >
-              <Form
-                form={form}
-                layout="vertical"
-                className={styles.form}
-                onValuesChange={(value, values) => {
-                  const valueKey = Object.keys(value)[0];
-                  excuteDepConfig(valueKey, values);
-                }}
-              >
-                <FormItem name="admins" label="管理员">
-                  <SelectTMEPerson placeholder="请邀请团队成员" />
-                </FormItem>
-
-                <Divider />
-
-                <Space direction="vertical" style={{ width: '100%' }} size={35}>
-                  {Object.keys(systemConfig).map((key: string) => {
-                    const itemList = systemConfig[key];
-                    return (
-                      <ProCard
-                        title={<span style={{ color: '#296df3' }}>{key}</span>}
-                        key={key}
-                        bordered
-                        id={key}
-                      >
-                        {genneratorFormItemList(itemList, form)}
-                      </ProCard>
-                    );
-                  })}
-                </Space>
-              </Form>
-            </ProCard>
-          </Col>
-          <Col span={6} style={{ background: '#fff' }}>
-            <div style={{ marginTop: 20 }}>
-              <Anchor items={anchorItems} />
+       <div style={{ margin: '0 auto' }}>
+          <div style={{ background: '#fff', width: '15%', height: '1000px', position: 'fixed', boxShadow: '0.5px 0.5px 3px grey'}}>
+            <div style={{ marginTop: 1 }}>
+              <Anchor items={anchorItems} style={{ marginTop: 10 }}/>
             </div>
-          </Col>
-        </Row>
-      </div>
+          </div>
+
+          <div style={{ width: '84%', float: 'right' }}>
+            <div style={{background: '#fff', minHeight: '18vh', marginBottom: '10px', overflow: 'auto'}}>
+              <Form form={form} layout="vertical" style={{padding:'20px'}}>
+                <h2 style={{display:'inline-block'}}>系统设置</h2>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    querySaveSystemConfig();
+                  }}
+                  style={{ float: 'right' }}
+                >
+                  保 存
+                </Button>
+                <FormItem name="admins" label="管理员">
+                  <SelectTMEPerson placeholder="请邀请团队成员"/>
+                </FormItem>
+              </Form>
+              {/*{showUser(showState)}*/}
+            </div>
+
+            <div style={{background: '#fff', height: '60vh', overflow:'auto'}} className={'rightBottom'}>
+              <ProCard
+                title=""
+                extra={
+                  <Space>
+                  </Space>
+                }
+              >
+                <Form form={form} layout="vertical">
+                  <Space direction="vertical" style={{ width: '100%' }} size={35}>
+                    {Object.keys(systemConfig).map((key: string) => {
+                      const itemList = systemConfig[key];
+                      return (
+                        <ProCard
+                          title={<span style={{ color: '#296df3' }}>{key}</span>}
+                          key={key}
+                          bordered
+                          id={key}
+                        >
+                          {genneratorFormItemList(itemList, form)}
+                        </ProCard>
+                      );
+                    })}
+
+                  </Space>
+                </Form>
+              </ProCard>
+            </div>
+          </div>
+       </div>
     </>
   );
 };

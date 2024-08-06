@@ -10,4 +10,6 @@ public interface UserRepository {
     void addUser(UserDO userDO);
 
     UserDO getUser(String name);
+
+    void editUser(UserDO userDO);
 }

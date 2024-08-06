@@ -14,6 +14,9 @@ import { configProviderTheme } from '../config/themeSettings';
 export { request } from './services/request';
 import { ROUTE_AUTH_CODES } from '../config/routes';
 import AppPage from './pages/index';
+import { size } from 'lodash';
+
+const logo_path = '@/assets/icon.png';
 
 const replaceRoute = '/';
 
@@ -108,9 +111,9 @@ export async function getInitialState(): Promise<{
 export function onRouteChange() {
   const title = window.document.title.split('-SuperSonic')[0];
   if (!title.includes('SuperSonic')) {
-    window.document.title = `${title}-SuperSonic`;
+    window.document.title = `${title}`;
   } else {
-    window.document.title = 'SuperSonic';
+    window.document.title = '智能问数';
   }
 }
 
@@ -122,18 +125,50 @@ export const layout: RunTimeLayoutConfig = (params) => {
       history.push(replaceRoute);
     },
     logo: (
+      // 更换图标和网站标题
       <Space>
-        <S2Icon
-          icon={ICON.iconlogobiaoshi}
-          size={30}
-          color="#1672fa"
-          style={{ display: 'inline-block', marginTop: 8 }}
-        />
-        <div className="logo" style={{ position: 'relative', top: '-2px' }}>
-          SuperSonic
+        <img src={require("./assets/icon.png")} />
+        <div className="header-title">
+          <div className="logo-title">智能问数</div>
+          <div className="logo-subtitle">—— INTELLIGENT INQUIRY ——</div>
         </div>
       </Space>
     ),
+    // 运行时配置token，实现顶部导航栏样式调整
+    token: {
+      colorBgAppListIconHover: 'rgba(0,0,0,0.06)',
+      colorTextAppListIconHover: 'rgba(255,255,255,0.95)',
+      colorTextAppListIcon: 'rgba(255,255,255,0.85)',
+      sider: {
+        colorBgCollapsedButton: '#fff',
+        colorTextCollapsedButtonHover: 'rgba(0,0,0,0.65)',
+        colorTextCollapsedButton: 'rgba(0,0,0,0.45)',
+        colorMenuBackground: '#004FD9',
+        colorBgMenuItemCollapsedElevated: 'rgba(0,0,0,0.85)',
+        colorMenuItemDivider: 'rgba(255,255,255,0.15)',
+        colorBgMenuItemHover: 'rgba(0,0,0,0.06)',
+        colorBgMenuItemSelected: 'rgba(0,0,0,0.15)',
+        colorTextMenuSelected: '#fff',
+        colorTextMenuItemHover: 'rgba(255,255,255,0.75)',
+        colorTextMenu: 'rgba(255,255,255,0.75)',
+        colorTextMenuSecondary: 'rgba(255,255,255,0.65)',
+        colorTextMenuTitle: 'rgba(255,255,255,0.95)',
+        colorTextMenuActive: 'rgba(255,255,255,0.95)',
+        colorTextSubMenuSelected: '#fff',
+      },
+      header: {
+        colorBgHeader: '#004FD9',
+        colorBgRightActionsItemHover: 'rgba(0,0,0,0.06)',
+        colorTextRightActionsItem: 'rgba(255,255,255,0.65)',
+        colorHeaderTitle: '#fff',
+        colorBgMenuItemHover: 'rgba(0,0,0,0.06)',
+        colorBgMenuItemSelected: 'rgba(0,0,0,0.15)',
+        colorTextMenuSelected: '#fff',
+        colorTextMenu: 'rgba(255,255,255,0.75)',
+        colorTextMenuSecondary: 'rgba(255,255,255,0.65)',
+        colorTextMenuActive: 'rgba(255,255,255,0.95)',
+      },
+    },
     contentStyle: { ...(initialState?.contentStyle || {}) },
     rightContentRender: () => <RightContent />,
     disableContentMargin: true,

@@ -1,7 +1,7 @@
 // import type { FC } from 'react';
 import styles from './style.less';
 import { Button, Form, Input, message, Space } from 'antd';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, SafetyOutlined, UserOutlined } from '@ant-design/icons';
 import RegisterForm from './components/RegisterForm';
 // import ForgetPwdForm from './components/ForgetPwdForm';
 import { ROUTE_AUTH_CODES } from '../../../config/routes';
@@ -52,6 +52,11 @@ const LoginPage: React.FC = () => {
     await loginDone({ ...content, password: encryptPassword(content.password, encryptKey) });
   };
 
+  // 处理验证码按钮响应
+  const handleAuth = async () => {
+    console.log("验证码");
+  }
+
   // 处理注册弹窗确定按钮
   const handleRegister = async (values: RegisterFormDetail) => {
     const enCodeValues = { ...values, password: encryptPassword(values.password, encryptKey) };
@@ -83,43 +88,45 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className={styles.loginWarp}>
+    <img src={require("@/assets/zhinengwenshu.png")} className={styles.loginLogo}/>
       <div className={styles.content}>
         <div className={styles.formContent}>
           <div className={styles.formBox}>
             <Form form={form} labelCol={{ span: 6 }} colon={false}>
               <div className={styles.loginMain}>
                 <h3 className={styles.title}>
-                  <Space>
-                    <S2Icon
-                      icon={ICON.iconlogobiaoshi}
-                      size={30}
-                      color="#296DF3"
-                      style={{ display: 'inline-block', marginTop: 8 }}
-                    />
-                    <div>SuperSonic</div>
-                  </Space>
+                  <img src={require("@/assets/zhinengwenshu.png")} style={{width: '55%'}}/>
                 </h3>
                 <Item name="name" rules={[{ required: true }]} label="">
-                  <Input size="large" placeholder="用户名: admin" prefix={<UserOutlined />} />
+                  <Input size="large" placeholder="用户名" prefix={<UserOutlined />} />
                 </Item>
                 <Item name="password" rules={[{ required: true }]} label="">
                   <Input
                     size="large"
                     type="password"
-                    placeholder="密码: 123456"
+                    placeholder="密码"
                     onPressEnter={handleLogin}
                     prefix={<LockOutlined />}
                   />
                 </Item>
+                {/* <Item name="auth" rules={[{ required: true }]} label="">
+                  <Input
+                    size="large"
+                    placeholder="验证码"
+                    onPressEnter={handleAuth}
+                    prefix={<SafetyOutlined />}
+                    style={{ width: '230px' }}
+                  />
+                </Item> */}
 
                 <Button className={styles.signInBtn} type="primary" onClick={handleLogin}>
                   登录
                 </Button>
 
                 <div className={styles.tool}>
-                  <Button className={styles.button} onClick={handleRegisterBtn}>
+                  {/* <Button className={styles.button} onClick={handleRegisterBtn}>
                     注册
-                  </Button>
+                  </Button> */}
                   {/* <Button className={styles.button} type="link" onClick={handleForgetPwdBtn}>
               忘记密码
             </Button> */}

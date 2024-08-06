@@ -1,5 +1,5 @@
 # Use an official OpenJDK runtime as a parent image
-FROM openjdk:8-jdk
+FROM harbor.bigdata.com/chatbi/openjdk:8-jdk
 
 # Set the working directory in the container
 WORKDIR /usr/src/app

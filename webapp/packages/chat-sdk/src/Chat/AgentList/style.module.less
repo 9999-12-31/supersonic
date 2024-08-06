@@ -2,7 +2,7 @@
   position: relative;
   width: 248px;
   height: 100%;
-  background: #f9f9f9;
+  background: #ffffff;
   border-right: 1px solid #f1f1f1;
 
   .header {
@@ -14,7 +14,7 @@
 
     .headerTitle {
       color: var(--text-color);
-      font-weight: 500;
+      font-weight: 600;
       font-size: 15px;
     }
 
@@ -32,7 +32,7 @@
   .agentListContent {
     display: flex;
     flex-direction: column;
-    padding: 4px 8px;
+    // padding: 4px 8px;
     row-gap: 2px;
     height: calc(100% - 50px);
     overflow-y: auto;
@@ -40,11 +40,11 @@
     .agentItem {
       display: flex;
       align-items: center;
-      padding: 8px 4px;
+      padding: 8px 14px;
       column-gap: 8px;
-      border-radius: 8px;
+      // border-radius: 8px;
       cursor: pointer;
-
+	  height: 70px;
       .avatar {
         font-size: 40px;
       }
@@ -71,7 +71,7 @@
 
       &:hover,
       &.active {
-        background: #22a5f7;
+        background: #004fd9;
 
         .agentName,
         .agentDesc {

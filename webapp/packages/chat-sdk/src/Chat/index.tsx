@@ -474,7 +474,7 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
           {currentAgent &&
             (isMobile ? (
               <Drawer
-                title="showcase"
+                title="示例"
                 placement="bottom"
                 height="95%"
                 open={showCaseVisible}
@@ -488,7 +488,7 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
               </Drawer>
             ) : (
               <Modal
-                title="showcase"
+                title="示例"
                 width="98%"
                 open={showCaseVisible}
                 centered

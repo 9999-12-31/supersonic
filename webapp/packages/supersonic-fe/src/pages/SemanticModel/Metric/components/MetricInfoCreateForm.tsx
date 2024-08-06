@@ -624,7 +624,7 @@ const MetricInfoCreateForm: React.FC<CreateFormProps> = ({
               label="指标名称"
               rules={[{ required: true, message: '请输入指标名称' }]}
             >
-              <Input placeholder="名称不可重复" />
+              <Input placeholder="名称不可重复" style={{height: '30px'}}/>
             </FormItem>
           </Col>
           <Col span={12}>
@@ -633,7 +633,7 @@ const MetricInfoCreateForm: React.FC<CreateFormProps> = ({
               label="英文名称"
               rules={[{ required: true, message: '请输入英文名称' }]}
             >
-              <Input placeholder="名称不可重复" disabled={isEdit} />
+              <Input placeholder="名称不可重复" disabled={isEdit}  style={{height: '30px'}}/>
             </FormItem>
           </Col>
         </Row>
@@ -644,7 +644,7 @@ const MetricInfoCreateForm: React.FC<CreateFormProps> = ({
               label="敏感度"
               rules={[{ required: true, message: '请选择敏感度' }]}
             >
-              <Select placeholder="请选择敏感度">
+              <Select placeholder="请选择敏感度"  style={{height: '30px'}}>
                 {SENSITIVE_LEVEL_OPTIONS.map((item) => (
                   <Option key={item.value} value={item.value}>
                     {item.label}
@@ -661,6 +661,7 @@ const MetricInfoCreateForm: React.FC<CreateFormProps> = ({
                 tokenSeparators={[',']}
                 maxTagCount={9}
                 options={tagOptions}
+                style={{height: '30px'}}
               />
             </FormItem>
           </Col>
@@ -690,7 +691,7 @@ const MetricInfoCreateForm: React.FC<CreateFormProps> = ({
           }
           rules={[{ required: true, message: '请输入业务口径' }]}
         >
-          <TextArea placeholder="请输入业务口径" style={{ minHeight: 173 }} />
+          <TextArea placeholder="请输入业务口径" style={{ minHeight: 50 }} />
         </FormItem>
 
         <FormItem label="别名">
@@ -698,11 +699,12 @@ const MetricInfoCreateForm: React.FC<CreateFormProps> = ({
             <Col flex="1 1 200px">
               <FormItem name="alias" noStyle>
                 <Select
-                  style={{ maxWidth: 500 }}
+                  style={{ maxWidth: 500, height: '30px' }}
                   mode="tags"
                   placeholder="输入别名后回车确认，多别名输入、复制粘贴支持英文逗号自动分隔"
                   tokenSeparators={[',']}
                   maxTagCount={9}
+
                 />
               </FormItem>
             </Col>
@@ -712,7 +714,7 @@ const MetricInfoCreateForm: React.FC<CreateFormProps> = ({
                   <Button
                     type="primary"
                     loading={llmLoading}
-                    style={{ top: '5px' }}
+                    // style={{ top: '3px' }}
                     onClick={() => {
                       generatorMetricAlias();
                     }}
@@ -724,6 +726,10 @@ const MetricInfoCreateForm: React.FC<CreateFormProps> = ({
             )}
           </Row>
         </FormItem>
+
+
+
+
         <Divider />
         <FormItem
           name="isTag"
@@ -750,7 +756,11 @@ const MetricInfoCreateForm: React.FC<CreateFormProps> = ({
             </Col>
           </Row>
         </FormItem>
-        <Divider />
+
+
+
+
+
         <FormItem>
           <Row gutter={20}>
             <Col flex="1 1 200px">
@@ -772,14 +782,14 @@ const MetricInfoCreateForm: React.FC<CreateFormProps> = ({
             </Col>
           </Row>
         </FormItem>
-        <Divider />
-        <FormItem label={<FormItemTitle title={'数据格式化'} />} name="dataFormatType">
+
+        {/*<FormItem label={<FormItemTitle title={'数据格式化'} />} name="dataFormatType">
           <Radio.Group buttonStyle="solid" size="middle">
             <Radio.Button value="">默认</Radio.Button>
             <Radio.Button value="decimal">小数</Radio.Button>
             <Radio.Button value="percent">百分比</Radio.Button>
           </Radio.Group>
-        </FormItem>
+        </FormItem>*/}
 
         {(isPercentState || isDecimalState) && (
           <FormItem
@@ -835,7 +845,10 @@ const MetricInfoCreateForm: React.FC<CreateFormProps> = ({
                 >
                   <Space>
                     <ArrowLeftOutlined />
-                    返回列表页
+                    返回列表页&nbsp;&nbsp;
+                    <Button type="primary" onClick={handleSave}>
+                      保 存
+                    </Button>
                   </Space>
                 </Button>
               </span>
@@ -868,13 +881,13 @@ const MetricInfoCreateForm: React.FC<CreateFormProps> = ({
                 {renderContent()}
               </Form>
             </div>
-            <div className={styles.infoCardFooter}>
+            {/*<div className={styles.infoCardFooter}>
               <div className={styles.infoCardFooterContainer}>
                 <Button type="primary" onClick={handleSave}>
                   保 存
                 </Button>
               </div>
-            </div>
+            </div>*/}
           </div>
           <DimensionAndMetricRelationModal
             metricItem={metricItem}

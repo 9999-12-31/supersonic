@@ -76,30 +76,8 @@ const MetricInfoEditSider: React.FC<Props> = ({ metircData, onSettingKeyChange }
         )}
 
         <hr className={styles.hr} />
-        <div className={styles.section} style={{ padding: '16px 0' }}>
-          <ul className={styles.settingList}>
-            {settingList.map((item) => {
-              return (
-                <li
-                  className={item.key === settingKey ? styles.active : ''}
-                  key={item.key}
-                  onClick={() => {
-                    onSettingKeyChange?.(item.key);
-                    setSettingKey(item.key);
-                  }}
-                >
-                  <div className={styles.icon}>{item.icon}</div>
-                  <div className={styles.content}>
-                    <span className={styles.text}> {item.text}</span>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        {/* <hr className={styles.hr} /> */}
         {metircData?.id && (
-          <div className={styles.section} style={{ marginTop: 'auto' }}>
+          <div className={styles.section}>
             <div className={styles.sectionTitleBox}>
               <span className={styles.sectionTitle}>
                 <Space>
@@ -152,6 +130,31 @@ const MetricInfoEditSider: React.FC<Props> = ({ metircData, onSettingKeyChange }
             </div>
           </div>
         )}
+
+        <hr className={styles.hr} />
+        <div className={styles.section} style={{ padding: '16px 0' }}>
+          <ul className={styles.settingList}>
+            {settingList.map((item) => {
+              return (
+                <li
+                  className={item.key === settingKey ? styles.active : ''}
+                  key={item.key}
+                  onClick={() => {
+                    onSettingKeyChange?.(item.key);
+                    setSettingKey(item.key);
+                  }}
+                >
+                  <div className={styles.icon}>{item.icon}</div>
+                  <div className={styles.content}>
+                    <span className={styles.text}> {item.text}</span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        {/* <hr className={styles.hr} /> */}
+
 
         {/* <hr className={styles.hr} /> */}
       </div>

@@ -2,6 +2,7 @@ package com.tencent.supersonic.auth.api.authentication.service;
 
 import com.tencent.supersonic.auth.api.authentication.pojo.Organization;
 import com.tencent.supersonic.auth.api.authentication.pojo.User;
+import com.tencent.supersonic.auth.api.authentication.request.UserEditReq;
 import com.tencent.supersonic.auth.api.authentication.request.UserReq;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,4 +29,6 @@ public interface UserService {
     List<User> getUserByOrg(String key);
 
     List<Organization> getOrganizationTree();
+
+    void edit(UserEditReq userEditCmd);
 }
