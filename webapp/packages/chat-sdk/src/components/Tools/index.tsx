@@ -13,17 +13,33 @@ type Props = {
 
 const Tools: React.FC<Props> = ({ queryId, scoreValue, isLastMessage }) => {
   const [score, setScore] = useState(scoreValue || 0);
+  const [likeTag, setLikeTag] = useState(false);
+  const [disLikeTag, setDisLikeTag] = useState(false);
 
   const prefixCls = `${CLS_PREFIX}-tools`;
 
   const like = () => {
-    setScore(5);
-    updateQAFeedback(queryId, 5);
+    if (!likeTag) {
+      setLikeTag(true);
+      setScore(5);
+      updateQAFeedback(queryId, 5);
+    } else if (likeTag) {
+      setLikeTag(false);
+      setScore(0);
+      updateQAFeedback(queryId, 0);
+    }
   };
 
   const dislike = () => {
-    setScore(1);
-    updateQAFeedback(queryId, 1);
+    if (!disLikeTag) {
+      setDisLikeTag(true);
+      setScore(1);
+      updateQAFeedback(queryId, 1);
+    }else if(disLikeTag){
+      setDisLikeTag(false);
+      setScore(0);
+      updateQAFeedback(queryId, 0);
+    }
   };
 
   const likeClass = classNames(`${prefixCls}-like`, {

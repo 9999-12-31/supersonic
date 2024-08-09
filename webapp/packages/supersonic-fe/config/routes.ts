@@ -169,6 +169,12 @@ const ROUTES = [
     access: ROUTE_AUTH_CODES.SYSTEM_ADMIN,
   },
   {
+    path: '/kanban',
+    name: 'kanban',
+    component: './Kanban',
+    access: ROUTE_AUTH_CODES.SYSTEM_ADMIN,
+  },
+  {
     path: '/',
     redirect: APP_TARGET === 'inner' ? '/model' : '/chat',
     envRedirect: {
