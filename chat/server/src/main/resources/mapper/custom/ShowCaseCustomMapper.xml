@@ -61,7 +61,15 @@
             from (
                select *
                from s2_chat_query
-               where query_state = 1 and agent_id = ${agentId} and score = 5
+               where query_state = 1 and agent_id = ${agentId} 
+               <choose>
+                    <when test="score != null and score != ''">
+                        and score = ${score} 
+                    </when>
+                    <otherwise>
+                        and score = 5
+                    </otherwise>
+               </choose>
                <if test="userName != null and userName != ''">
                      and user_name = #{userName}
                </if>
@@ -69,7 +77,15 @@
             ) a
             limit #{start}, #{limit}
         ) q2 on q1.chat_id = q2.chat_id
-        where agent_id = ${agentId} and score = 5
+        where agent_id = ${agentId}
+        <choose>
+            <when test="score != null and score != ''">
+                and score = ${score} 
+            </when>
+            <otherwise>
+                and score = 5
+            </otherwise>
+       </choose>
     </select>
 
 </mapper>

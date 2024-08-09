@@ -1,4 +1,9 @@
 s2:
+
+  schema:
+    cache:
+      enable: true
+
   parser:
     strategy: ONE_PASS_SELF_CONSISTENCY
     exemplar-recall:
@@ -16,7 +21,7 @@ s2:
     date: true
 
   demo:
-    enable: true
+    enable: false
     names: S2VisitsDemo,S2ArtistDemo,SmallTalkDemo
     enableLLM: true
 
