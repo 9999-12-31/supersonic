@@ -25,7 +25,7 @@ const KanbanMenu = ({
                         </div>
                         <Menu
                             mode="inline"
-                            defaultSelectedKeys={['231']}
+                            defaultSelectedKeys={['1']}
                             style={{ width: 246, fontSize: "15px", lineHeight: "20px" }}
                             className={styles.menuTree}
                             items={items}
