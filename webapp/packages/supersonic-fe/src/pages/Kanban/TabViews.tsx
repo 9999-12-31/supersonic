@@ -3,7 +3,7 @@ import styles from './style.less';
 import { queryShowCase } from '../../../../chat-sdk/src/ShowCase/service';
 import Text from '../../../../chat-sdk/src/Chat/components/Text';
 import ChatItem from '../../../../chat-sdk/src/components/ChatItem/index';
-import { Empty } from 'antd';
+import { Empty, Card } from 'antd';
 
 type Props = {
     activeKey: number,
@@ -45,7 +45,6 @@ const TabViews: React.FC<Props> = ({ activeKey, tabKey }) => {
             // setPageNo(1);
         }
     }, [tabKey, activeKey]);
-
     return (
         <div className={styles.showCaseContent}>
             {showCaseList.length === 0 && !isQuesting ? <Empty className={styles.emptyContent} /> :
@@ -69,13 +68,25 @@ const TabViews: React.FC<Props> = ({ activeKey, tabKey }) => {
                                                 score={chatItem.score}
                                                 onSendMsg={(msg: string) => { }}
                                             />
+                                            {
+                                                chatItem.score === 1
+                                                    ?
+                                                    <Card
+                                                        style={{ maxWidth: "calc(100% - 50px)", marginLeft: "40px" }}
+                                                        title="用户建议反馈"
+                                                    >
+                                                        {chatItem.feedback}
+                                                    </Card>
+                                                    :
+                                                    ""
+                                            }
                                         </div>
                                     );
                                 })}
                         </div>
                     );
                 })}
-        </div>
+        </div >
     )
 }
 
