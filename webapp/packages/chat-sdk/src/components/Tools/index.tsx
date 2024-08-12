@@ -1,4 +1,5 @@
 import { isMobile } from '../../utils/utils';
+import { Button, Modal, Input } from 'antd';
 import { DislikeOutlined, LikeOutlined } from '@ant-design/icons';
 import { CLS_PREFIX } from '../../common/constants';
 import { useEffect, useState } from 'react';
@@ -15,7 +16,10 @@ const Tools: React.FC<Props> = ({ queryId, scoreValue, isLastMessage }) => {
   const [score, setScore] = useState(scoreValue || 0);
   const [likeTag, setLikeTag] = useState(false);
   const [disLikeTag, setDisLikeTag] = useState(false);
+  const [suggestModal, setSuggestModal] = useState(false);
+  const [suggestContent, setSuggestContent] = useState('');
   const prefixCls = `${CLS_PREFIX}-tools`;
+  const { TextArea } = Input;
 
   useEffect(() => {
     if (score === 0) {
@@ -41,15 +45,20 @@ const Tools: React.FC<Props> = ({ queryId, scoreValue, isLastMessage }) => {
 
   const dislike = () => {
     if (!disLikeTag) {
-      setDisLikeTag(true);
-      setScore(1);
-      updateQAFeedback(queryId, 1);
+      setSuggestModal(true);
     } else if (disLikeTag) {
       setDisLikeTag(false);
       setScore(0);
-      updateQAFeedback(queryId, 0);
+      updateQAFeedback(queryId, 0, '');
     }
   };
+
+  const handleSubmit = () => {
+    setDisLikeTag(true);
+    setScore(1);
+    setSuggestModal(false);
+    updateQAFeedback(queryId, 1, suggestContent);
+  }
 
   const likeClass = classNames(`${prefixCls}-like`, {
     [`${prefixCls}-feedback-active`]: score === 5,
@@ -73,6 +82,20 @@ const Tools: React.FC<Props> = ({ queryId, scoreValue, isLastMessage }) => {
           />
         </div>
       )}
+      <Modal
+        title="请描述您对该回答不满意的内容"
+        centered
+        open={suggestModal}
+        okText="提交"
+        onOk={handleSubmit}
+        onCancel={() => setSuggestModal(false)}
+      >
+        <TextArea
+          rows={5}
+          placeholder="请在此处简要描述您的意见"
+          onChange={(e) => { setSuggestContent(e.target.value) }}
+        />
+      </Modal>
     </div>
   );
 };
