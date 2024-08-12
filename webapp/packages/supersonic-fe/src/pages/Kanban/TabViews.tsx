@@ -3,6 +3,7 @@ import styles from './style.less';
 import { queryShowCase } from '../../../../chat-sdk/src/ShowCase/service';
 import Text from '../../../../chat-sdk/src/Chat/components/Text';
 import ChatItem from '../../../../chat-sdk/src/components/ChatItem/index';
+import { Empty } from 'antd';
 
 type Props = {
     activeKey: number,
@@ -12,7 +13,7 @@ type Props = {
 const TabViews: React.FC<Props> = ({ activeKey, tabKey }) => {
 
     const [showCaseList, setShowCaseList] = useState([]);
-
+    const [isQuesting, setIsQuesting] = useState(false);
     const updateData =
         async (pageNoValue: number) => {
             const res = activeKey === 1
@@ -34,41 +35,46 @@ const TabViews: React.FC<Props> = ({ activeKey, tabKey }) => {
 
     useEffect(() => {
         if (tabKey) {
-            setShowCaseList([]);
-            updateData(1);
+            try {
+                setIsQuesting(true)
+                setShowCaseList([]);
+                updateData(1);
+            } finally {
+                setIsQuesting(false);
+            }
             // setPageNo(1);
         }
     }, [tabKey, activeKey]);
 
-
     return (
         <div className={styles.showCaseContent}>
-            {showCaseList.map((showCaseItem: any) => {
-                return (
-                    <div key={showCaseItem.caseId} className={styles.showCaseItem}>
-                        {showCaseItem.msgList
-                            .filter((chatItem: any) => !!chatItem.queryResult)
-                            .slice(0, 1)
-                            .map((chatItem: any) => {
-                                return (
-                                    <div className={styles.showCaseChatItem} key={chatItem.questionId}>
-                                        <Text position="right" data={chatItem.queryText} anonymousUser />
-                                        <ChatItem
-                                            msg={chatItem.queryText}
-                                            parseInfos={chatItem.parseInfos}
-                                            msgData={chatItem.queryResult}
-                                            conversationId={chatItem.chatId}
-                                            agentId={tabKey}
-                                            integrateSystem="showcase"
-                                            score={chatItem.score}
-                                            onSendMsg={(msg: string) => { }}
-                                        />
-                                    </div>
-                                );
-                            })}
-                    </div>
-                );
-            })}
+            {showCaseList.length === 0 && !isQuesting ? <Empty className={styles.emptyContent} /> :
+                showCaseList.map((showCaseItem: any) => {
+                    return (
+                        <div key={showCaseItem.caseId} className={styles.showCaseItem}>
+                            {showCaseItem.msgList
+                                .filter((chatItem: any) => !!chatItem.queryResult)
+                                .slice(0, 1)
+                                .map((chatItem: any) => {
+                                    return (
+                                        <div className={styles.showCaseChatItem} key={chatItem.questionId}>
+                                            <Text position="right" data={chatItem.queryText} anonymousUser />
+                                            <ChatItem
+                                                msg={chatItem.queryText}
+                                                parseInfos={chatItem.parseInfos}
+                                                msgData={chatItem.queryResult}
+                                                conversationId={chatItem.chatId}
+                                                agentId={tabKey}
+                                                integrateSystem="showcase"
+                                                score={chatItem.score}
+                                                onSendMsg={(msg: string) => { }}
+                                            />
+                                        </div>
+                                    );
+                                })}
+                        </div>
+                    );
+                })}
         </div>
     )
 }
