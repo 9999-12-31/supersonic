@@ -20,18 +20,17 @@ const ShowCase: React.FC<Props> = ({ height, agentId, onSendMsg }) => {
   const [showCaseList, setShowCaseList] = useState<ShowCaseItemType[]>([]);
   const [loading, setLoading] = useState(false);
   const [pageNo, setPageNo] = useState(1);
-
   const showcaseRef = useRef<any>(null);
 
   const updateData = async (pageNoValue: number) => {
     if (pageNoValue === 1) {
       setLoading(true);
     }
-    const res = await queryShowCase(agentId, pageNoValue, isMobile ? 10 : 20);
+    const res = await queryShowCase(agentId, pageNoValue, isMobile ? 10 : 20, 5);
     if (pageNoValue === 1) {
       setLoading(false);
     }
-    const showCaseMapRes: any = res.data.showCaseMap || {};
+    const showCaseMapRes: any = res?.data?.showCaseMap || {};
     const list = Object.keys(showCaseMapRes)
       .reduce((result: ShowCaseItemType[], key: string) => {
         result.push({ msgList: showCaseMapRes[key], caseId: key });
