@@ -58,6 +58,8 @@ public class NL2SQLParser implements ChatQueryParser {
             + "#Rules: "
             + "1.ALWAYS keep relevant entities, metrics, dimensions, values and date ranges."
             + "2.ONLY respond with the rewritten question in natural language, no SQL keywords appear."
+            + "3.ALWAYS complete the current question with history question and history SQL."
+            + "4.JUST rewrite the current question, analysis process or notes are NOT required."
             + "#Current Question: {{current_question}}"
             + "#Current Mapped Schema: {{current_schema}}"
             + "#History Question: {{history_question}}"
