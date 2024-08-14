@@ -121,6 +121,11 @@
             <artifactId>DmJdbcDriver18</artifactId>
             <version>8.1.2.192</version>
         </dependency>
+        <dependency>
+            <groupId>io.prestosql</groupId>
+            <artifactId>presto-jdbc</artifactId>
+            <version>350</version>
+        </dependency>
     </dependencies>
 
 
