@@ -19,7 +19,6 @@ const Tools: React.FC<Props> = ({ queryId, scoreValue, isLastMessage }) => {
   const [suggestContent, setSuggestContent] = useState('');
   const [messageApi, contextHolder] = message.useMessage();
   const [popState, setPopState] = useState(false);
-  // const [destroyOr, setDestoryOr] = useState(false);
   const prefixCls = `${CLS_PREFIX}-tools`;
   const { TextArea } = Input;
 
