@@ -1,5 +1,5 @@
 import { Tabs, Breadcrumb, Space, Radio } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useModel } from '@umijs/max';
 import styles from './style.less';
 import { HomeOutlined } from '@ant-design/icons';
@@ -13,7 +13,7 @@ type Props = {
 const KanbanDetails: React.FC<Props> = ({
     activeKey,
 }) => {
-    const [tabKey, setTabKey] = useState(1);
+    const [tabKey, setTabKey] = useState(0);
     const [tabData, setTabData] = useState({});
 
     const initAgentList = async () => {
@@ -27,13 +27,13 @@ const KanbanDetails: React.FC<Props> = ({
     useEffect(() => {
         initAgentList();
     }, []);
-
+    
     const items = Object.values(tabData).map((val: any, index) =>
         [
             {
                 key: val.id,
                 label: val.name,
-                children: <TabViews activeKey={activeKey} tabKey={tabKey} />,
+                children: <TabViews activeKey={activeKey} tabKey={val.id} />,
             }
         ]
     ).reduce(function (a, b) {

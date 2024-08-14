@@ -34,8 +34,8 @@ export function chatQuery(queryText: string, chatId?: number, modelId?: number, 
     modelId,
     queryFilters: filters
       ? {
-          filters,
-        }
+        filters,
+      }
       : undefined,
   });
 }
@@ -54,8 +54,8 @@ export function chatParse(
     agentId,
     queryFilters: filters
       ? {
-          filters,
-        }
+        filters,
+      }
       : undefined,
   });
 }
@@ -109,9 +109,9 @@ export function queryEntities(entityId: string | number, modelId: number) {
   });
 }
 
-export function updateQAFeedback(questionId: number, score: number) {
+export function updateQAFeedback(questionId: number, score: number, feedback?: string) {
   return axios.post<any>(
-    `${prefix}/chat/manage/updateQAFeedback?id=${questionId}&score=${score}&feedback=`
+    `${prefix}/chat/manage/updateQAFeedback?id=${questionId}&score=${score}&feedback=${feedback}`
   );
 }
 
