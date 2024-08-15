@@ -73,7 +73,7 @@ const TabViews: React.FC<Props> = ({ activeKey, tabKey }) => {
                                                 chatItem.score === 1
                                                     ?
                                                     <Card
-                                                        style={{ maxWidth: "calc(100% - 50px)", marginLeft: "40px" }}
+                                                        style={{ maxWidth: "60%", marginLeft: "40px" }}
                                                         title="用户建议反馈"
                                                     >
                                                         {chatItem.feedback}
