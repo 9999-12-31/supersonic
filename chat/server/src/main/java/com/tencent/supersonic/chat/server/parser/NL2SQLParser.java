@@ -180,7 +180,7 @@ public class NL2SQLParser implements ChatQueryParser {
         QueryNLReq queryNLReq = QueryReqConverter.buildText2SqlQueryReq(parseContext);
         MapResp currentMapResult = chatLayerService.performMapping(queryNLReq);
 
-        //获取最近5次历史查询
+        //获取最近5次历史查询 lijun
         List<QueryResp> historyQueries = getHistoryQueries(parseContext.getChatId(), 5);
         if (historyQueries.size() == 0) {
             return;
@@ -198,7 +198,7 @@ public class NL2SQLParser implements ChatQueryParser {
         String lastSQL="";
         for (QueryResp _lastQuery : historyQueries) {
             if(!lastSQL.equals(_lastQuery.getParseInfos().get(0).getSqlInfo().getCorrectedS2SQL())) {
-                histSQL += _lastQuery.getParseInfos().get(0).getSqlInfo().getCorrectedS2SQL() + ";\n";
+                histSQL = histSQL+_lastQuery.getParseInfos().get(0).getSqlInfo().getCorrectedS2SQL() + ";\n";
             }
             lastSQL=_lastQuery.getParseInfos().get(0).getSqlInfo().getCorrectedS2SQL();
         }
