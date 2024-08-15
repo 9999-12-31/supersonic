@@ -14,6 +14,7 @@ const TabViews: React.FC<Props> = ({ activeKey, tabKey }) => {
 
     const [showCaseList, setShowCaseList] = useState([]);
     const [isQuesting, setIsQuesting] = useState(false);
+
     const updateData =
         async (pageNoValue: number) => {
             const res = activeKey === 1
@@ -32,7 +33,6 @@ const TabViews: React.FC<Props> = ({ activeKey, tabKey }) => {
                 });
             setShowCaseList(pageNoValue === 1 ? list : [...showCaseList, ...list]);
         };
-
     useEffect(() => {
         if (tabKey) {
             try {
@@ -47,14 +47,15 @@ const TabViews: React.FC<Props> = ({ activeKey, tabKey }) => {
     }, [tabKey, activeKey]);
     return (
         <div className={styles.showCaseContent}>
-            {showCaseList.length === 0 && !isQuesting ? <Empty className={styles.emptyContent} /> :
-                showCaseList.map((showCaseItem: any) => {
+            {showCaseList.length === 0 && !isQuesting ? <Empty className={styles.emptyContent} description="暂无案例反馈" /> :
+                showCaseList.map((showCaseItem: any) => {  
                     return (
                         <div key={showCaseItem.caseId} className={styles.showCaseItem}>
                             {showCaseItem.msgList
                                 .filter((chatItem: any) => !!chatItem.queryResult)
-                                .slice(0, 1)
+                                // .slice(0, 1)
                                 .map((chatItem: any) => {
+                                    console.log('qqqqq', chatItem)
                                     return (
                                         <div className={styles.showCaseChatItem} key={chatItem.questionId}>
                                             <Text position="right" data={chatItem.queryText} anonymousUser />
@@ -72,7 +73,7 @@ const TabViews: React.FC<Props> = ({ activeKey, tabKey }) => {
                                                 chatItem.score === 1
                                                     ?
                                                     <Card
-                                                        style={{ maxWidth: "calc(100% - 50px)", marginLeft: "40px" }}
+                                                        style={{ maxWidth: "60%", marginLeft: "40px" }}
                                                         title="用户建议反馈"
                                                     >
                                                         {chatItem.feedback}

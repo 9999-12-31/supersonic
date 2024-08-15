@@ -89,7 +89,7 @@ const ShowCase: React.FC<Props> = ({ height, agentId, onSendMsg }) => {
               <div key={showCaseItem.caseId} className={styles.showCaseItem}>
                 {showCaseItem.msgList
                   .filter((chatItem: HistoryMsgItemType) => !!chatItem.queryResult)
-                  .slice(0, 1)
+                  // .slice(0, 1)
                   .map((chatItem: HistoryMsgItemType) => {
                     return (
                       <div className={styles.showCaseChatItem} key={chatItem.questionId}>
