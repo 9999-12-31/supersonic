@@ -185,7 +185,6 @@ const DomainListTree: FC<DomainListProps> = ({
   const handleExpand = (_expandedKeys: Key[]) => {
     setExpandedKeys(_expandedKeys as string[]);
   };
-
   const items = domainList
     .filter((domain) => domain.parentId === 0)
     .map((domain: ISemantic.IDomainItem) => {

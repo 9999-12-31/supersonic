@@ -9,11 +9,12 @@ type Props = {
 };
 
 const DEFAULT_HEIGHT = 800;
+const DEFAULT_WIDTH = "100%";
 
 const WebPage: React.FC<Props> = ({ id, data }) => {
   const [pluginUrl, setPluginUrl] = useState('');
   const [height, setHeight] = useState(DEFAULT_HEIGHT);
-
+  const [width, setWidth] = useState(DEFAULT_WIDTH);
   const {
     name,
     webPage: { url, params },
@@ -65,6 +66,10 @@ const WebPage: React.FC<Props> = ({ id, data }) => {
       params?.find((option: any) => option.paramType === 'FORWARD' && option.key === 'height')
         ?.value || DEFAULT_HEIGHT;
     setHeight(heightValue);
+    const widthValue =
+      params?.find((option: any) => option.paramType === 'FORWARD' && option.key === 'width')
+        ?.value || DEFAULT_HEIGHT;
+    setWidth(widthValue);
     let urlValue = url;
     const valueParams = (params || [])
       .filter((option: any) => option.paramType !== 'FORWARD')
@@ -111,7 +116,7 @@ const WebPage: React.FC<Props> = ({ id, data }) => {
       id={`reportIframe_${id}`}
       name={`reportIframe_${id}`}
       src={pluginUrl}
-      style={{ width: '100%', height, border: 'none' }}
+      style={{ width, height, border: 'none' }}
       title="reportIframe"
       allowFullScreen
     />

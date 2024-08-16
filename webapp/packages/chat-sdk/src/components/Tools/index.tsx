@@ -88,7 +88,7 @@ const Tools: React.FC<Props> = ({ queryId, scoreValue, isLastMessage }) => {
             placement="rightTop"
             fresh
             open={popState}
-            onOpenChange={(r)=>{setPopState(r)}}
+            onOpenChange={(r) => { setPopState(r) }}
             content={
               <div style={{ textAlign: "right" }}>
                 <TextArea
