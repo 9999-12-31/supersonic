@@ -56,7 +56,7 @@ export async function getInitialState(): Promise<{
       if (code === 200) {
         return { ...data, staffName: data.staffName || data.name };
       }
-    } catch (error) {}
+    } catch (error) { }
     return undefined;
   };
 

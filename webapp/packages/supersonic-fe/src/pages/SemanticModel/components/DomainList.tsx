@@ -50,13 +50,13 @@ const DomainListTree: FC<DomainListProps> = ({
   const [classList, setClassList] = useState<ISemantic.IDomainItem[]>([]);
   const domainModel = useModel('SemanticModel.domainData');
   const { selectDomainId, domainList } = domainModel;
-
+  
   useEffect(() => {
     const treeData = addPathInTreeData(constructorClassTreeFromList(domainList));
     setProjectTree(treeData);
     setClassList(domainList);
     setExpandedKeys(treeParentKeyLists(treeData));
-  }, [domainList]);
+  }, [domainList]); 
 
   const onSearch = (value: any) => {
     setFliterValue(value);

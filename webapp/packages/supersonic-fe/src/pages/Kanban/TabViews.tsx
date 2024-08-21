@@ -55,7 +55,6 @@ const TabViews: React.FC<Props> = ({ activeKey, tabKey }) => {
                                 .filter((chatItem: any) => !!chatItem.queryResult)
                                 // .slice(0, 1)
                                 .map((chatItem: any) => {
-                                    console.log('qqqqq', chatItem)
                                     return (
                                         <div className={styles.showCaseChatItem} key={chatItem.questionId}>
                                             <Text position="right" data={chatItem.queryText} anonymousUser />
