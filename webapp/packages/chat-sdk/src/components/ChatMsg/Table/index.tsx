@@ -68,11 +68,12 @@ const Table: React.FC<Props> = ({ data, size, loading, onApplyAuth }) => {
     return index % 2 !== 0 ? `${prefixCls}-even-row` : '';
   };
 
+  //该代码不用的原因：后端传过来的数据并没有明确的区分column.type === 'DATE'，
+  //所以无法确定哪些是日期类型，因此需要前端自行判断
   const dateColumn = queryColumns.find(column => column.type === 'DATE');
   const dataSource = dateColumn
     ? queryResults.sort((a, b) => moment(a[dateColumn.nameEn]).diff(moment(b[dateColumn.nameEn])))
     : queryResults;
-
   return (
     <div className={prefixCls}>
       <AntTable
