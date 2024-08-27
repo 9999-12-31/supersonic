@@ -401,7 +401,7 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
                       <Row style={{ width: '100%' }}>
                         <Col flex="1 1 200px">
                           <Space>
-                            <div className={styles.chatHeaderTitle}>{currentAgent.name}</div>
+                            <div className={styles.chatHeaderTitle}>&nbsp;{currentAgent.name}</div>
                             <div className={styles.chatHeaderTip}>{currentAgent.description}</div>
                             <Tooltip title="精简模式下，问答结果将以文本形式输出">
                               <Switch
