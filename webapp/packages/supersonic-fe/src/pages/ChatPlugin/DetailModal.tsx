@@ -78,10 +78,14 @@ const DetailModal: React.FC<Props> = ({ detail, onSubmit, onCancel }) => {
       const height = paramOptions?.find(
         (option: any) => option.paramType === 'FORWARD' && option.key === 'height',
       )?.value;
+      const width = paramOptions?.find(
+        (option: any) => option.paramType === 'FORWARD' && option.key === 'width',
+      )?.value;
       form.setFieldsValue({
         ...detail,
         url: detail.config?.url,
         height,
+        width,
       });
       setDataSetList(detail.dataSetList || []);
       if (paramOptions?.length > 0) {
@@ -160,6 +164,11 @@ const DetailModal: React.FC<Props> = ({ detail, onSubmit, onCancel }) => {
         paramType: ParamTypeEnum.FORWARD,
         key: 'height',
         value: values.height || undefined,
+      },
+      {
+        paramType: ParamTypeEnum.FORWARD,
+        key: 'width',
+        value: values.width || undefined,
       },
     ]);
     const config = {
@@ -412,6 +421,9 @@ const DetailModal: React.FC<Props> = ({ detail, onSubmit, onCancel }) => {
           </>
         )}
         <FormItem name="height" label="高度">
+          <InputNumber placeholder="单位px" />
+        </FormItem>
+        <FormItem name="width" label="宽度">
           <InputNumber placeholder="单位px" />
         </FormItem>
       </Form>

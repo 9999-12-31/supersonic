@@ -11,6 +11,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import NoPermissionChart from '../NoPermissionChart';
 import { ColumnType } from '../../../common/type';
 import { Spin } from 'antd';
+import moment from 'moment';
 
 type Props = {
   data: MsgDataType;
@@ -40,8 +41,22 @@ const BarChart: React.FC<Props> = ({ data, triggerResize, loading, metricField, 
       instanceObj = instance;
     }
     const data = (queryResults || []).sort(
-      (a: any, b: any) => b[metricColumnName] - a[metricColumnName]
+      //按照纵坐标数值由大到小排序
+      // (a: any, b: any) => b[metricColumnName] - a[metricColumnName]
+      (a: any, b: any) => {
+        let aDate = Date.parse(a[categoryColumnName]);
+        let bDate = Date.parse(b[categoryColumnName]);
+        return (
+          //判断是否是时间格式，如果是则按照横轴时间由小到大排序
+          isNaN(a[categoryColumnName]) && !isNaN(aDate)
+            ?
+            aDate - bDate
+            :
+            a[categoryColumnName] - b[categoryColumnName]
+        )
+      }
     );
+
     const xData = data.map(item =>
       item[categoryColumnName] !== undefined ? item[categoryColumnName] : '未知'
     );
@@ -79,8 +94,8 @@ const BarChart: React.FC<Props> = ({ data, triggerResize, loading, metricField, 
             return value === 0
               ? 0
               : metricField.dataFormatType === 'percent'
-              ? `${formatByDecimalPlaces(value, metricField.dataFormat?.decimalPlaces || 2)}%`
-              : getFormattedValue(value);
+                ? `${formatByDecimalPlaces(value, metricField.dataFormat?.decimalPlaces || 2)}%`
+                : getFormattedValue(value);
           },
         },
       },
@@ -91,19 +106,16 @@ const BarChart: React.FC<Props> = ({ data, triggerResize, loading, metricField, 
           const valueLabels = params
             .map(
               (item: any) =>
-                `<div style="margin-top: 3px;">${
-                  item.marker
-                } <span style="display: inline-block; width: 70px; margin-right: 12px;">${
-                  item.seriesName
-                }</span><span style="display: inline-block; width: 90px; text-align: right; font-weight: 500;">${
-                  item.value === ''
-                    ? '-'
-                    : metricField.dataFormatType === 'percent' ||
-                      metricField.dataFormatType === 'decimal'
+                `<div style="margin-top: 3px;">${item.marker
+                } <span style="display: inline-block; width: 70px; margin-right: 12px;">${item.seriesName
+                }</span><span style="display: inline-block; width: 90px; text-align: right; font-weight: 500;">${item.value === ''
+                  ? '-'
+                  : metricField.dataFormatType === 'percent' ||
+                    metricField.dataFormatType === 'decimal'
                     ? `${formatByDecimalPlaces(
-                        item.value,
-                        metricField.dataFormat?.decimalPlaces || 2
-                      )}${metricField.dataFormatType === 'percent' ? '%' : ''}`
+                      item.value,
+                      metricField.dataFormat?.decimalPlaces || 2
+                    )}${metricField.dataFormatType === 'percent' ? '%' : ''}`
                     : getFormattedValue(item.value)
                 }</span></div>`
             )
@@ -136,8 +148,8 @@ const BarChart: React.FC<Props> = ({ data, triggerResize, loading, metricField, 
             return value === 0
               ? 0
               : metricField.dataFormatType === 'percent'
-              ? `${formatByDecimalPlaces(value, metricField.dataFormat?.decimalPlaces || 2)}%`
-              : getFormattedValue(value);
+                ? `${formatByDecimalPlaces(value, metricField.dataFormat?.decimalPlaces || 2)}%`
+                : getFormattedValue(value);
           },
         },
         data: data.map(item => {

@@ -19,7 +19,6 @@ const Tools: React.FC<Props> = ({ queryId, scoreValue, isLastMessage }) => {
   const [suggestContent, setSuggestContent] = useState('');
   const [messageApi, contextHolder] = message.useMessage();
   const [popState, setPopState] = useState(false);
-  // const [destroyOr, setDestoryOr] = useState(false);
   const prefixCls = `${CLS_PREFIX}-tools`;
   const { TextArea } = Input;
 
@@ -50,11 +49,12 @@ const Tools: React.FC<Props> = ({ queryId, scoreValue, isLastMessage }) => {
       setDisLikeTag(true);
       setScore(1);
       updateQAFeedback(queryId, 1, '');
+      setPopState(true);
     } else if (disLikeTag) {
       setDisLikeTag(false);
       setScore(0);
       updateQAFeedback(queryId, 0, '');
-      setPopState(true);
+      setPopState(false);
     }
   };
 
@@ -67,6 +67,7 @@ const Tools: React.FC<Props> = ({ queryId, scoreValue, isLastMessage }) => {
         marginTop: '20vh',
       },
     });
+    setPopState(false);
   }
 
   const likeClass = classNames(`${prefixCls}-like`, {
@@ -85,8 +86,9 @@ const Tools: React.FC<Props> = ({ queryId, scoreValue, isLastMessage }) => {
           <LikeOutlined className={likeClass} onClick={like} />
           <Popover
             placement="rightTop"
-            onOpenChange={(r) => { setPopState(r);  }}
             fresh
+            open={popState}
+            onOpenChange={(r) => { setPopState(r) }}
             content={
               <div style={{ textAlign: "right" }}>
                 <TextArea
@@ -103,7 +105,7 @@ const Tools: React.FC<Props> = ({ queryId, scoreValue, isLastMessage }) => {
                 </Button>
               </div>
             }
-            trigger={`${disLikeTag ? "hover" : popState ? "hover" : "click"}`}
+            trigger="click"
           >
             <DislikeOutlined
               className={dislikeClass}
