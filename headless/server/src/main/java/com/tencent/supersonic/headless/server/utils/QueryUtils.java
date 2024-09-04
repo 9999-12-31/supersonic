@@ -129,7 +129,8 @@ public class QueryUtils {
             return false;
         }
         if (type.equalsIgnoreCase("int") || type.equalsIgnoreCase("bigint")
-                || type.equalsIgnoreCase("float") || type.equalsIgnoreCase("double")) {
+                || type.equalsIgnoreCase("float") || type.equalsIgnoreCase("double")
+                || type.equalsIgnoreCase("numeric")) { //增加numeric类型为number的判断
             return true;
         }
         if (type.toLowerCase().startsWith("uint") || type.toLowerCase().startsWith("int")) {
