@@ -135,7 +135,8 @@ const DomainListTree: FC<DomainListProps> = ({
         >
           {name}
         </span>
-        {createDomainBtnVisible && hasEditPermission && (
+        {/* {createDomainBtnVisible && hasEditPermission && ( */}
+        {true && (
           <span className={`${styles.operation}  ${styles.rowHover} `}>
             {Array.isArray(path) && path.length < 2 && !hasModel && (
               <PlusOutlined
