@@ -1,5 +1,5 @@
 import { message, Tabs, Button, Space } from 'antd';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, act } from 'react';
 import { getMetricData, getDimensionList, getDrillDownDimension } from '../service';
 import { useParams, history } from '@umijs/max';
 import styles from './style.less';
@@ -7,9 +7,12 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 import MetricTrendSection from '@/pages/SemanticModel/Metric/components/MetricTrendSection';
 import { ISemantic } from '../data';
 import MetricBasicInfo from './components/MetricBasicInfo';
+import MetricApiInfo from './components/MetricApiInfo';
 import DimensionAndMetricRelationModal from '../components/DimensionAndMetricRelationModal';
 import MetricInfoSider from './MetricInfoSider';
 import type { TabsProps } from 'antd';
+import { Provider } from 'react-redux';
+import store from '../../../store';
 
 type Props = Record<string, any>;
 
@@ -25,6 +28,7 @@ const MetricDetail: React.FC<Props> = () => {
   const [relationDimensionOptions, setRelationDimensionOptions] = useState<
     { value: string; label: string; modelId: number }[]
   >([]);
+  const [load, setLoad] = useState<boolean>(false)
 
   useEffect(() => {
     queryMetricData(metricId);
@@ -93,16 +97,15 @@ const MetricDetail: React.FC<Props> = () => {
         />
       ),
     },
-
-    // {
-    //   key: 'metricDataRemark',
-    //   label: '备注',
-    //   children: <></>,
-    // },
+    {
+      key: 'metricApi',
+      label: '接口参数',
+      children: <MetricApiInfo load={load} />,
+    },
   ];
 
   return (
-    <>
+    <Provider store={store}>
       <div className={styles.metricDetailWrapper}>
         <div className={styles.metricDetail}>
           {/*<div className={styles.siderContainer}>*/}
@@ -119,6 +122,11 @@ const MetricDetail: React.FC<Props> = () => {
             <Tabs
               defaultActiveKey="metricCaliberInput"
               items={tabItems}
+              onChange={(activeKey: string)=>{
+                if(activeKey == 'metricTrend' && !load){
+                  setLoad(true)
+                }
+              }}
               tabBarExtraContent={{
                 right: (
                   <Button
@@ -156,7 +164,7 @@ const MetricDetail: React.FC<Props> = () => {
           }}
         />
       </div>
-    </>
+    </Provider>
   );
 };
 

@@ -14,8 +14,8 @@ import dayjs from 'dayjs';
 import { ISemantic } from '../../data';
 import { DateFieldMap } from '@/pages/SemanticModel/constant';
 import { ProCard } from '@ant-design/pro-components';
-
 import styles from '../style.less';
+import { useDispatch } from 'react-redux';
 
 const FormItem = Form.Item;
 
@@ -58,6 +58,8 @@ const MetricTrendSection: React.FC<Props> = ({
 
   const [groupByDimensionFieldName, setGroupByDimensionFieldName] = useState<string>();
 
+  const dispatch = useDispatch();
+
   const getMetricTrendData = async (params: any = { download: false }) => {
     const { download, dimensionGroup = [], dimensionFilters = [] } = params;
     if (download) {
@@ -99,6 +101,7 @@ const MetricTrendSection: React.FC<Props> = ({
     const { code, data, msg } = res;
     setMetricTrendLoading(false);
     if (code === 200) {
+      dispatch({ type: 'SET_MESSAGE', payload: res });
       const { resultList, columns, queryAuthorization } = data;
 
       setTableColumnConfig(columns);
@@ -344,4 +347,4 @@ const MetricTrendSection: React.FC<Props> = ({
   );
 };
 
-export default MetricTrendSection;
+export default MetricTrendSection
