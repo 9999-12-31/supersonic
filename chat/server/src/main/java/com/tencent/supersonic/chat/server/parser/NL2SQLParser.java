@@ -196,12 +196,10 @@ public class NL2SQLParser implements ChatQueryParser {
         QueryNLReq queryNLReq = QueryReqConverter.buildText2SqlQueryReq(parseContext);
         MapResp currentMapResult = chatLayerService.performMapping(queryNLReq);
 
-        // 获取最近5次历史查询 lijun
-        List<QueryResp> historyQueries = getHistoryQueries(parseContext.getChatId(), 5);
+        List<QueryResp> historyQueries = getHistoryQueries(parseContext.getChatId(), 1);
         if (historyQueries.size() == 0) {
             return;
         }
-
         QueryResp lastQuery = historyQueries.get(0);
         SemanticParseInfo lastParseInfo = lastQuery.getParseInfos().get(0);
         Long dataId = lastParseInfo.getDataSetId();
@@ -209,16 +207,7 @@ public class NL2SQLParser implements ChatQueryParser {
         String curtMapStr =
                 generateSchemaPrompt(currentMapResult.getMapInfo().getMatchedElements(dataId));
         String histMapStr = generateSchemaPrompt(lastParseInfo.getElementMatches());
-        // 提供最近5次历史SQL给大模型
-        // String histSQL = lastParseInfo.getSqlInfo().getCorrectedS2SQL();
-        String histSQL = "";
-        String lastSQL = "";
-        for (QueryResp queryResp : historyQueries) {
-            if (!lastSQL.equals(queryResp.getParseInfos().get(0).getSqlInfo().getCorrectedS2SQL())) {
-                histSQL = histSQL + queryResp.getParseInfos().get(0).getSqlInfo().getCorrectedS2SQL() + ";\n";
-            }
-            lastSQL = queryResp.getParseInfos().get(0).getSqlInfo().getCorrectedS2SQL();
-        }
+        String histSQL = lastParseInfo.getSqlInfo().getCorrectedS2SQL();
 
         Map<String, Object> variables = new HashMap<>();
         variables.put("current_question", currentMapResult.getQueryText());

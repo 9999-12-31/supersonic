@@ -100,10 +100,17 @@ public class ChatQueryRepositoryImpl implements ChatQueryRepository {
     }
 
     @Override
-    public List<QueryResp> queryShowCase(PageQueryInfoReq pageQueryInfoReq, Integer agentId, Integer score) {
-        return showCaseCustomMapper.queryShowCase(pageQueryInfoReq.getLimitStart(),
-                        pageQueryInfoReq.getPageSize(), agentId, score, pageQueryInfoReq.getUserName())
-                .stream().map(this::convertTo)
+    public List<QueryResp> queryShowCase(
+            PageQueryInfoReq pageQueryInfoReq, Integer agentId, Integer score) {
+        return showCaseCustomMapper
+                .queryShowCase(
+                        pageQueryInfoReq.getLimitStart(),
+                        pageQueryInfoReq.getPageSize(),
+                        agentId,
+                        score,
+                        pageQueryInfoReq.getUserName())
+                .stream()
+                .map(this::convertTo)
                 .collect(Collectors.toList());
     }
 

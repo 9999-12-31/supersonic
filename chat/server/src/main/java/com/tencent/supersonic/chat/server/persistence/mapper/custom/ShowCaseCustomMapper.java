@@ -9,5 +9,4 @@ import java.util.List;
 public interface ShowCaseCustomMapper {
 
     List<ChatQueryDO> queryShowCase(int start, int limit, int agentId, int score, String userName);
-
 }

@@ -22,7 +22,8 @@ public interface ChatQueryRepository {
 
     ChatQueryDO getChatQueryDO(Long queryId);
 
-    List<QueryResp> queryShowCase(PageQueryInfoReq pageQueryInfoCommend, Integer agentId, Integer score);
+    List<QueryResp> queryShowCase(
+            PageQueryInfoReq pageQueryInfoCommend, Integer agentId, Integer score);
 
     int updateChatQuery(ChatQueryDO chatQueryDO);
 

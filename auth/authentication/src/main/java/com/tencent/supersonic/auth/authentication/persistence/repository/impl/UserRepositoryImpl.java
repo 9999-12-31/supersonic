@@ -41,5 +41,4 @@ public class UserRepositoryImpl implements UserRepository {
     public void editUser(UserDO userDO) {
         userDOMapper.update(userDO);
     }
-
 }

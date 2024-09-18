@@ -166,5 +166,4 @@ public class DefaultUserAdaptor implements UserAdaptor {
 
         userRepository.editUser(userDO);
     }
-
 }

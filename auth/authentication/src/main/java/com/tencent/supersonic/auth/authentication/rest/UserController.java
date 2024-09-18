@@ -9,7 +9,6 @@ import com.tencent.supersonic.auth.api.authentication.request.UserEditReq;
 import com.tencent.supersonic.auth.api.authentication.request.UserReq;
 import com.tencent.supersonic.auth.api.authentication.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -78,5 +77,4 @@ public class UserController {
     public void edit(@RequestBody UserEditReq userEditCmd) {
         userService.edit(userEditCmd);
     }
-
 }

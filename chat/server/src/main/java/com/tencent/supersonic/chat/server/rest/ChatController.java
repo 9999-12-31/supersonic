@@ -95,9 +95,10 @@ public class ChatController {
     }
 
     @PostMapping("/queryShowCase")
-    public ShowCaseResp queryShowCase(@RequestBody PageQueryInfoReq pageQueryInfoCommand,
-                                      @RequestParam(value = "agentId") Integer agentId,
-                                      @RequestParam(value = "score") Integer score) {
+    public ShowCaseResp queryShowCase(
+            @RequestBody PageQueryInfoReq pageQueryInfoCommand,
+            @RequestParam(value = "agentId") Integer agentId,
+            @RequestParam(value = "score") Integer score) {
         return chatService.queryShowCase(pageQueryInfoCommand, agentId, score);
     }
 }

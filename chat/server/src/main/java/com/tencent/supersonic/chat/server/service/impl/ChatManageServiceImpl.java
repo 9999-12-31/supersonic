@@ -113,11 +113,13 @@ public class ChatManageServiceImpl implements ChatManageService {
     }
 
     @Override
-    public ShowCaseResp queryShowCase(PageQueryInfoReq pageQueryInfoReq, Integer agentId, Integer score) {
+    public ShowCaseResp queryShowCase(
+            PageQueryInfoReq pageQueryInfoReq, Integer agentId, Integer score) {
         ShowCaseResp showCaseResp = new ShowCaseResp();
         showCaseResp.setCurrent(pageQueryInfoReq.getCurrent());
         showCaseResp.setPageSize(pageQueryInfoReq.getPageSize());
-        List<QueryResp> queryResps = chatQueryRepository.queryShowCase(pageQueryInfoReq, agentId, score);
+        List<QueryResp> queryResps =
+                chatQueryRepository.queryShowCase(pageQueryInfoReq, agentId, score);
         if (CollectionUtils.isEmpty(queryResps)) {
             return showCaseResp;
         }
