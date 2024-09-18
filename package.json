@@ -1,9 +1,11 @@
 {
   "devDependencies": {
+    "@types/react-copy-to-clipboard": "^5.0.7",
     "react-json-view": "^1.21.3"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-redux": "^9.1.2",
     "redux": "^5.0.1"
   }
