@@ -1,9 +1,10 @@
 package com.tencent.supersonic.auth.authentication.rest;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.tencent.supersonic.auth.api.authentication.pojo.Organization;
 import com.tencent.supersonic.auth.api.authentication.pojo.User;
-import com.tencent.supersonic.auth.api.authentication.request.UserEditReq;
 import com.tencent.supersonic.auth.api.authentication.request.UserReq;
 import com.tencent.supersonic.auth.api.authentication.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Set;
 
@@ -33,7 +32,8 @@ public class UserController {
     }
 
     @GetMapping("/getCurrentUser")
-    public User getCurrentUser(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public User getCurrentUser(
+            HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         return userService.getCurrentUser(httpServletRequest, httpServletResponse);
     }
 
@@ -71,11 +71,6 @@ public class UserController {
     @PostMapping("/login")
     public String login(@RequestBody UserReq userCmd, HttpServletRequest request) {
         return userService.login(userCmd, request);
-    }
-
-    @PostMapping("/edit")
-    public void edit(@RequestBody UserEditReq userEditCmd) {
-        userService.edit(userEditCmd);
     }
 
 }

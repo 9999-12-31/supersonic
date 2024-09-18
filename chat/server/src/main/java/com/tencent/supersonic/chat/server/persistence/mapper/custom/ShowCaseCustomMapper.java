@@ -2,6 +2,7 @@ package com.tencent.supersonic.chat.server.persistence.mapper.custom;
 
 import com.tencent.supersonic.chat.server.persistence.dataobject.ChatQueryDO;
 import org.apache.ibatis.annotations.Mapper;
+
 import java.util.List;
 
 @Mapper

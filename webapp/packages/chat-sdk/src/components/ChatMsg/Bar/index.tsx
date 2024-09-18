@@ -15,13 +15,21 @@ import moment from 'moment';
 
 type Props = {
   data: MsgDataType;
+  question: string;
   triggerResize?: boolean;
   loading: boolean;
   metricField: ColumnType;
   onApplyAuth?: (model: string) => void;
 };
 
-const BarChart: React.FC<Props> = ({ data, triggerResize, loading, metricField, onApplyAuth }) => {
+const BarChart: React.FC<Props> = ({
+  data,
+  question,
+  triggerResize,
+  loading,
+  metricField,
+  onApplyAuth,
+}) => {
   const chartRef = useRef<any>();
   const [instance, setInstance] = useState<ECharts>();
 
@@ -187,7 +195,7 @@ const BarChart: React.FC<Props> = ({ data, triggerResize, loading, metricField, 
   return (
     <div>
       <div className={`${prefixCls}-top-bar`}>
-        <div className={`${prefixCls}-indicator-name`}>{metricColumn?.name}</div>
+        <div className={`${prefixCls}-indicator-name`}>{question}</div>
       </div>
       <Spin spinning={loading}>
         <div className={`${prefixCls}-chart`} ref={chartRef} />
