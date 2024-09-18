@@ -76,7 +76,8 @@ public class DownloadServiceImpl implements DownloadService {
     @Override
     public void downloadByStruct(DownloadMetricReq downloadMetricReq,
                                  User user, HttpServletResponse response) throws Exception {
-        String fileName = String.format("%s_%s.xlsx", "supersonic", DateUtils.format(new Date(), DateUtils.FORMAT));
+        //将指标数据文件名中的supersonic替换为chatbi
+        String fileName = String.format("%s_%s.xlsx", "chatbi", DateUtils.format(new Date(), DateUtils.FORMAT));
         File file = FileUtils.createTmpFile(fileName);
         try {
             QueryStructReq queryStructReq = metricService.convert(downloadMetricReq);
@@ -94,7 +95,8 @@ public class DownloadServiceImpl implements DownloadService {
     @Override
     public void batchDownload(BatchDownloadReq batchDownloadReq, User user,
             HttpServletResponse response) throws Exception {
-        String fileName = String.format("%s_%s.xlsx", "supersonic", DateUtils.format(new Date(), DateUtils.FORMAT));
+        //将指标数据文件名中的supersonic替换为chatbi
+        String fileName = String.format("%s_%s.xlsx", "chatbi", DateUtils.format(new Date(), DateUtils.FORMAT));
         File file = FileUtils.createTmpFile(fileName);
         List<Long> metricIds = batchDownloadReq.getMetricIds();
         if (CollectionUtils.isEmpty(metricIds)) {
