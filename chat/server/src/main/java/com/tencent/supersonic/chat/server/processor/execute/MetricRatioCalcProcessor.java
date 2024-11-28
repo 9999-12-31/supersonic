@@ -77,7 +77,7 @@ public class MetricRatioCalcProcessor implements ExecuteResultProcessor {
         Set<String> resultMetricNames = getResultMetricNames(queryResult);
 
         Optional<SchemaElement> ratioMetric = semanticParseInfo.getMetrics().stream()
-                .filter(m -> resultMetricNames.contains(m.getBizName())).findFirst();
+                .filter(m -> resultMetricNames.contains(m.getName())).findFirst();
 
         AggregateInfo aggregateInfo = new AggregateInfo();
         if (!ratioMetric.isPresent()) {
